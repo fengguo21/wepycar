@@ -1,0 +1,2 @@
+@import "myui/main.wxss";
+@import "myui/icon.wxss";
