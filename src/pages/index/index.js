@@ -1,29 +1,29 @@
-//index.js
+// index.js
 // import * as store from '../../utils/store.js';
-//获取应用实例
-import * as store from '../../utils/store.js';
-import { getExternals } from '../../utils/api.js';
+// 获取应用实例
+import * as store from '../../utils/store.js'
+import { getExternals } from '../../utils/api.js'
 const app = getApp()
 
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    modalName:'',
+    modalName: '',
 
     userInfo: {},
     users: [],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  //事件处理函数
-  
+  // 事件处理函数
+
   getExternals(userIds) {
-    console.log(userIds,'======ren')
-    getExternals({ "externalUserIds": userIds }).then(res => {
+    console.log(userIds, '======ren')
+    getExternals({ 'externalUserIds': userIds }).then(res => {
       this.setData({
-        users:res.data.data
-        
+        users: res.data.data
+
       })
       store.set('myuers', res.data.data)
       console.log(res, 'select----------------')
@@ -32,23 +32,32 @@ Page({
   selectExternal() {
     let self = this
     wx.qy.selectExternalContact({
-      filterType: 0,//0表示展示全部外部联系人列表，1表示仅展示未曾选择过的外部联系人。默认值为0；除了0与1，其他值非法。
+      filterType: 0, // 0表示展示全部外部联系人列表，1表示仅展示未曾选择过的外部联系人。默认值为0；除了0与1，其他值非法。
       success: function (res) {
-        var userIds = res.userIds;// 返回此次选择的外部联系人userId列表，数组类型
+        var userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
        
         self.getExternals(userIds)
       }
-    });
+    })
   },
   onShow: function () {
     console.log(this.data.users, '======')
   },
   onLoad: function () {
-    if(store.get('myusers')){
+    // let self = this
+    // let userIds =[]
+    // wx.qy.getCurExternalContact({
+    //   success: function (res) {
+    //     var userId = res.userId //返回当前外部联系人userId
+    //     userIds.push(userId)
+    //     self.getExternals(userIds)
+    //   }
+    // })
+    if (store.get('myusers')) {
       this.setData({
         users: store.get('myusers')
       })
-      console.log(this.data.users,'======')
+      console.log(this.data.users, '======')
     }
 
     if (app.globalData.userInfo) {
@@ -91,14 +100,14 @@ Page({
   },
   toDetail(e) {
     let user = e.currentTarget.dataset.item
-    console.log(e.currentTarget.dataset.item,'================')
-    if(user.bind == true){
+    console.log(e.currentTarget.dataset.item, '================')
+    if (user.bind == true) {
       this.showModal()
       return
     }
-    store.set('currentCustomer',user)
+    store.set('currentCustomer', user)
     wx.navigateTo({
-      url: "/pages/detail/detail"
+      url: '/pages/detail/detail'
     })
   },
   onShareAppMessage: function () {
