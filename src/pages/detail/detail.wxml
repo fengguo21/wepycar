@@ -1,10 +1,7 @@
-<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+<cu-custom bgColor="bg-theme" isBack="{{true}}">
   <view slot="content">卡地亚客户绑定</view>
 </cu-custom>
 <view class="cu-list menu-avatar margin-bottom">
-
-
-
   <view class="cu-item solid-bottom">
     <view class="cu-avatar radius lg" style="background-image:url({{user.avatar}});"></view>
     <view class="content">
@@ -20,11 +17,7 @@
       <view class="cu-tag round bg-red sm">待添加</view>
     </view>
   </view>
-
   <view wx:if='{{isChecked}}' class="cu-list menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
-
-
-
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <view class="content">
         <text class="cuIcon-form text-mauve"></text>
@@ -43,7 +36,6 @@
         <text class="text-grey text-sm">{{cdbInfo.fullName}}</text>
       </view>
     </view>
-
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <view class="content">
         <text class="cuIcon-profilefill text-mauve"></text>
@@ -53,7 +45,6 @@
         <text class="text-grey text-sm">{{cdbInfo.firstNameEn}} {{cdbInfo.lastNameEn}}</text>
       </view>
     </view>
-
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <view class="content">
         <text class="cuIcon-mobile text-mauve"></text>
@@ -63,7 +54,6 @@
         <text class="text-grey text-sm">{{cdbInfo.mobileNumber}}</text>
       </view>
     </view>
-
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <view class="content">
         <text class="cuIcon-mail text-mauve"></text>
@@ -73,7 +63,6 @@
         <text class="text-grey text-sm">{{cdbInfo.email}}</text>
       </view>
     </view>
-
     <view class="cu-item {{menuArrow?'arrow':''}}">
       <view class="content">
         <text class="cuIcon-location text-mauve"></text>
@@ -85,54 +74,36 @@
     </view>
     <view class="padding flex flex-direction">
       <button class="cu-btn bg-grey lg" bindtap='recheck'>重新匹配</button>
-      <button class="cu-btn bg-mauve margin-tb-sm lg" bindtap='confirm'>确认绑定</button>
+      <button class="cu-btn bg-theme margin-tb-sm lg" bindtap='confirm'>确认绑定</button>
     </view>
   </view>
-
-
-
 </view>
-
 <view wx:if='{{!isChecked}}'>
   <view class="flex-sub text-center margin-top ">
     <view class=" text-xl padding">
       <text class="text-black text-bold">顾客CDB编号</text>
     </view>
     <view class="cu-form-group margin-left margin-right">
-
       <input placeholder="CDB编号" type="number" bindinput="inputCdb"></input>
-
     </view>
-
   </view>
   <view class="padding flex flex-direction">
-
-
-    <button class="cu-btn bg-mauve lg " bindtap='check'>查询</button>
-
+    <button class="cu-btn bg-theme lg " bindtap='check'>查询</button>
   </view>
-
 </view>
-
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
   <view class='cuIcon-emojifill text-orange'></view>
   <!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
   <view class='gray-text'>加载中...</view>
 </view>
-
 <view class="cu-modal  {{modalName=='Modal'?'show':''}}">
-
-<view class="cu-dialog">
+  <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">提示</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
-    <view class="padding-xl">
-      未匹配成功
-    </view>
-   
+    <view class="padding-xl">未匹配成功</view>
   </view>
-  
 </view>

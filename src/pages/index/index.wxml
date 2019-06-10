@@ -1,59 +1,41 @@
-<cu-custom bgColor="bg-gradual-pink">
-  <view slot="content" >卡地亚客户绑定</view>
+<cu-custom bgColor="bg-theme">
+  <view slot="content">卡地亚客户绑定</view>
 </cu-custom>
-
-<view class="cu-bar bg-white solid-bottom margin-top">
+<!-- <view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text>
+    我的客户
+  </view>
+</view> -->
+<view class="cu-list menu-avatar">
+  <view class="cu-item solid-bottom" wx:for="{{users}}" bindtap='toDetail' data-item="{{item}}">
+    <view class="cu-avatar radius lg" style="background-image:url({{item.avatar}});"></view>
+    <view class="content">
+      <view class="text-pink">
+        <text class="text-cut">{{item.name}}</text>
+      </view>
+      <view class="text-gray text-sm flex">
+        <text class="text-cut">{{item.bindDate}}</text>
+      </view>
+    </view>
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> 我的客户
+      <!-- <view class="text-grey text-xs">22:20</view> -->
+      <view class="cu-tag round bg-grey sm" wx:if="{{item.bind}}">已绑定</view>
+      <view class="cu-tag round bg-red sm" wx:else>待绑定</view>
     </view>
   </view>
-  <view class="cu-list menu-avatar">
-    
-   
-    <view class="cu-item solid-bottom" wx:for="{{users}}" bindtap='toDetail' data-item="{{item}}">
-      <view class="cu-avatar radius lg" style="background-image:url({{item.avatar}});"></view>
-      <view class="content">
-        <view class="text-pink">
-          <text class="text-cut">{{item.name}}</text>
-        </view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">{{item.bindDate}}</text>
-        </view>
-      </view>
-      <view class="action">
-        <!-- <view class="text-grey text-xs">22:20</view> -->
-   <view class="cu-tag round bg-grey sm" wx:if="{{item.bind}}">已绑定</view>
-        <view class="cu-tag round bg-red sm" wx:else>待绑定</view>
-        
-      </view>
-    </view>
-    
-   
-    
-    
-   
-  </view>
-
-<view class="padding flex flex-direction">
-
-  
-  <button class="cu-btn bg-mauve lg" bindtap='selectExternal'>添加外部联系人</button>
-  
 </view>
-
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-theme lg" bindtap='selectExternal'>添加外部联系人</button>
+</view>
 <view class="cu-modal  {{modalName=='Modal'?'show':''}}">
-
-<view class="cu-dialog">
+  <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">提示</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
-    <view class="padding-xl">
-      此客户已绑定
-    </view>
-   
+    <view class="padding-xl">此客户已绑定</view>
   </view>
-  
 </view>

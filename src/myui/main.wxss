@@ -13,6 +13,7 @@ page {
 	/* Color 可以自定义相关配色 */
 	/* var属性兼容性 --> https://www.caniuse.com/#feat=css-variables */
 	/* 标准色 */
+	--theme:#a50100;
 	--red: #e54d42;
 	--orange: #f37b1d;
 	--yellow: #fbbd08;
@@ -746,8 +747,8 @@ radio.white[checked] .wx-radio-input {
 
 .cu-btn.lg {
 	padding: 0 40rpx;
-	font-size: 32rpx;
-	height: 80rpx;
+	font-size: 16px;
+	height: 40px;
 }
 
 .cu-btn.icon.sm {
@@ -846,9 +847,9 @@ button.icon.lg {
 }
 
 .cu-tag.sm {
-	font-size: 20rpx;
-	padding: 0rpx 12rpx;
-	height: 32rpx;
+	font-size: 10px;
+	padding: 0rpx 6px;
+	height: 16px;
 }
 
 .cu-capsule {
@@ -942,8 +943,8 @@ button.icon.lg {
 	color: var(--white);
 	white-space: nowrap;
 	position: relative;
-	width: 64rpx;
-	height: 64rpx;
+	width: 32px;
+	height: 32px;
 	background-size: cover;
 	background-position: center;
 	vertical-align: middle;
@@ -957,8 +958,8 @@ button.icon.lg {
 }
 
 .cu-avatar.lg {
-	width: 96rpx;
-	height: 96rpx;
+	width: 48px;
+	height: 48px;
 	font-size: 2em;
 }
 
@@ -1270,7 +1271,7 @@ button.icon.lg {
 	position: relative;
 	display: flex;
 	padding-right: 10rpx;
-	height: 140rpx;
+	height: 70px;
 	background-color: var(--white);
 	justify-content: flex-end;
 	align-items: center
@@ -1287,7 +1288,7 @@ button.icon.lg {
 
 .cu-list.menu-avatar>.cu-item .content {
 	position: absolute;
-	left: 146rpx;
+	left: 85rpx;
 	width: calc(100% - 96rpx - 60rpx - 120rpx - 20rpx);
 	line-height: 1.6em;
 }
@@ -1305,9 +1306,9 @@ button.icon.lg {
 .cu-list.menu-avatar>.cu-item .content .cu-tag.sm {
 	display: inline-block;
 	margin-left: 10rpx;
-	height: 28rpx;
-	font-size: 16rpx;
-	line-height: 32rpx
+	height: 14px;
+	font-size: 8px;
+	line-height: 16px
 }
 
 .cu-list.menu-avatar>.cu-item .action {
@@ -1436,9 +1437,9 @@ button.icon.lg {
 .cu-list.menu>.cu-item .content .cu-tag.sm {
 	display: inline-block;
 	margin-left: 10rpx;
-	height: 28rpx;
-	font-size: 16rpx;
-	line-height: 32rpx
+	height: 14px;
+	font-size: 8px;
+	line-height: 16px
 }
 
 .cu-list.menu>.cu-item .action .cu-tag:empty {
@@ -1597,7 +1598,7 @@ button.icon.lg {
 	z-index: 0;
 	text-align: right;
 	font-weight: 900;
-	font-size: 36rpx;
+	font-size: 18px;
 }
 
 .cu-bar.justify-center .action.border-title text:last-child,
@@ -1650,8 +1651,8 @@ button.icon.lg {
 	top: 0;
 	margin: auto;
 	height: 60rpx;
-	font-size: 32rpx;
-	line-height: 60rpx;
+	font-size: 16px;
+	line-height: 30px;
 	cursor: none;
 	pointer-events: none;
 	text-overflow: ellipsis;
@@ -3430,6 +3431,10 @@ scroll-view.cu-steps .cu-item {
 .line-white::after,
 .lines-white::after {
 	border-color: var(--white);
+}
+.bg-theme {
+	background-color: var(--theme);
+	color: var(--white);
 }
 
 .bg-red {
