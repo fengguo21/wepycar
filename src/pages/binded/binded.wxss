@@ -29,6 +29,7 @@ margin-top: 32px;
 }
 
 .content .greeting{
+     
 width:454px;
 height:161px;
 font-size:14px;
@@ -41,6 +42,13 @@ border-radius:2px;
 padding:15px;
 margin:15px 0;
 
+}
+.greeting .message{
+ border-top: 1px solid #f6efe3;
+}
+.greeting .message span{
+ border-bottom: 1px solid #f6efe3;
+padding-bottom:4px;
 }
 .line{
     border-top: 2px solid #DABA82;

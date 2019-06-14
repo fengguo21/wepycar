@@ -12,6 +12,9 @@
   "navigateToMiniProgramAppIdList": [
     "wx1ea318c84338cee5"
   ],
+  "usingComponents": {
+    "cu-custom": "/components/cu-custom"
+  },
   "resizable": true,
   "sitemapLocation": "sitemap.json"
 }

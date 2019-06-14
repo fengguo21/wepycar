@@ -73,7 +73,7 @@ line-height:48px;
 .handle .reCheck{
     margin-left:15px;
    
-    width:360px;
+    width:47%;
 height:44px;
 border-radius:1px;
 border:1px solid rgba(165,1,0,1);
@@ -85,7 +85,7 @@ line-height:44px;
 text-align: center
 }
 .handle .bind{
-    width:360px;
+    width:47%;
 height:44px;
 border-radius:1px;
 

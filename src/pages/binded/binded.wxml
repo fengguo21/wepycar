@@ -8,19 +8,13 @@
   <view class="greeting">
     <view class="">
       <text class="title">欢迎消息：</text>
-      <view class="line"></view>
     </view>
-    <view class=" text-df padding text-left">
-      您好！我是{{boutique}}{{saName}} ，很高兴为您服务。
-      <br />
-      <view class="line"></view>
-      如果您希望了解更多作品的保养建议，或有其他任何问题，作为您的专
-      <br />
-      <view class="line"></view>
-      <hr />
-      属销售顾问，我都可以直接在这里为您解答，随时欢迎您的咨询。
+    <view class="message">
+      <span>
+        您好！我是{{boutique}}{{saName}} ，很高兴为您服务。如果您希望了解更多作品的保养建议，或有其他任何问题，作为您的专属销售顾问，我都可以直接在这里为您解答，随时欢迎您的咨询。
+      </span>
     </view>
   </view>
   <button class="send" bindtap='sendGreeting'>复制并发送欢迎消息</button>
-  <view class="tips">点击长按即可复制消息，在聊天框内长按粘贴发送</view>
+  <view class="tips">点击即可复制消息，在聊天框内长按粘贴发送</view>
 </view>

@@ -1,0 +1,3 @@
+<view class="cu-custom" wx:if="{{isShow}}">
+  <view class='mask' bindtap="hide"></view>
+</view>

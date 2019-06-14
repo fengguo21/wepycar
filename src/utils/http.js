@@ -20,6 +20,73 @@ const login = function () {
     }
   })
 }
+const service = (path, params, method, head) => {
+  const newParams = { ...params }
+  const token = store.get('token')
+
+  if (head == 'head1') {
+
+  }
+
+  const header = {
+    'Authorization': 'Bearer ' + token,
+    'Content-Type': 'application/json;',
+    'brand': 'CAR'
+  }
+
+  wx.showToast({
+    title: '正在加载...',
+    duration: 10000,
+    mask: true,
+    icon: 'loading'
+  })
+  return new Promise((resolve) => {
+    wx.request({
+      url: `${base}/${path}`, // 仅为示例，并非真实的接口地址
+      data: newParams,
+      method: method,
+      header: header,
+      success: (res) => {
+        console.log(res, '---------------------')
+        wx.hideToast()
+        if (res.statusCode == 401) {
+          login()
+
+
+        }
+
+
+        if (res.data.status == 0) {
+          resolve(res)
+        } else {
+          if (res.data.status == 9000 | res.data.status == 1001 | res.data.status == 2003) {
+            wx.showModal({
+              title: '提示',
+              content: '网络错误或技术错误，请与管理员联系',
+              confirmColor: '#ffaf0e',
+              showCancel: false
+            })
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: res.data.message,
+              confirmColor: '#ffaf0e',
+              showCancel: false
+            })
+          }
+
+        }
+      },
+      fail: (error) => {
+        wx.hideToast()
+        wx.showModal({
+          title: '错误提示',
+          content: '网络出错，请稍候'
+        })
+      }
+    })
+  })
+}
 const get = (path, params, showToast) => {
   const newParams = { ...params }
   const token = store.get('token')
@@ -273,7 +340,8 @@ const http = {
   post,
   postHasToken,
   get,
-  put
+  put,
+  service
 }
 
 export default http

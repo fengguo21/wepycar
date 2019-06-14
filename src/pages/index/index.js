@@ -11,7 +11,7 @@ Page({
     CustomBar: app.globalData.CustomBar,
     chatUserId: '',
     selecting: false,
-
+    modelShow: true,
     userInfo: {},
     users: [],
     hasUserInfo: false,
@@ -78,6 +78,9 @@ Page({
           var userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
 
           self.getExternals(userIds)
+        },
+        fail: function (err) {
+          console.log(res, 'fail-------------')
         },
         complete: function () {
           self.setData({
