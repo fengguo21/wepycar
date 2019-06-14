@@ -1,17 +1,17 @@
 // pages/binded/binded.js
 import * as store from '../../utils/store.js';
-import { wxLogin } from '../../utils/api.js';
+
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    customer:'',
-    saName:'',
-    greeting:''
+    customer: '',
+    saName: '',
+    greeting: ''
   },
-  sendGreeting(){
+  sendGreeting() {
     let self = this
     wx.setClipboardData({
       data: this.data.greeting,
@@ -22,7 +22,7 @@ Page({
           }
         })
         wx.qy.openEnterpriseChat({
-       
+
           externalUserIds: self.data.customer.externalUserId, // 参与会话的外部联系人列表，格式为userId1;userId2;…，用分号隔开。
           groupName: '',  // 必填，会话名称。单聊时该参数传入空字符串""即可。
           success: function (res) {
@@ -40,16 +40,29 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    let self = this
     let customer = store.get('currentCustomer')
-    let saName = options.saName
+    // let saName = options.saName
+    let boutique = options.boutique
+    // 获取用户信息
 
-    console.log(customer,'ppppp')
-    this.setData({
-      customer: customer,
-      saName: saName,
-      greeting: '您好！我是' + saName + '，很高兴为您服务。如果您希望了解更多作品的保养建议，或有其他任何问题，作为您的专属销售顾问，我都可以直接在这里为您解答，随时欢迎您的咨询。'
+    wx.qy.getEnterpriseUserInfo({
+      success: function (res) {
 
-    });
+        let name = res.userInfo.name
+        self.setData({
+          customer: customer,
+          saName: name,
+          boutique: boutique,
+          greeting: '您好！我是' + boutique + name + '，很高兴为您服务。如果您希望了解更多作品的保养建议，或有其他任何问题，作为您的专属销售顾问，我都可以直接在这里为您解答，随时欢迎您的咨询。'
+
+        });
+
+
+      }
+    })
+
+
   },
 
   /**

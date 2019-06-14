@@ -3,32 +3,34 @@ import * as store from './store.js'
 const base = 'https://preprod.api.rwef.richemont.cn'
 import { wxLogin, checkToken, refreshToken } from './api.js'
 const APP_ID = 'wx752c282e61fdd08a'
-const login = function() {
+const login = function () {
   wx.qy.login({
     success: res => {
-              // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      console.log({
-       code: res.code,
-       brand: 'CAR',
-       agentId: '1000007',
-       type: 'binding'
+      // 发送 res.code 到后台换取 openId, sessionKey, unionId
 
-     }, '===============')
       wxLogin({
-       code: res.code,
-       brand: 'CAR',
-       agentId: '1000007',
-       type: 'binding'
+        code: res.code,
+        brand: 'CAR',
+        agentId: '1000007',
+        type: 'binding'
 
-     }).then(res => {
-                store.set('token', res.token)
-              })
+      }).then(res => {
+        store.set('token', res.token)
+      })
     }
   })
 }
 const get = (path, params, showToast) => {
   const newParams = { ...params }
   const token = store.get('token')
+
+  wx.showToast({
+    title: '正在加载...',
+    duration: 10000,
+    mask: true,
+    icon: 'loading'
+  })
+
   return new Promise((resolve) => {
     wx.request({
       url: `${base}/${path}`, // 仅为示例，并非真实的接口地址
@@ -40,24 +42,37 @@ const get = (path, params, showToast) => {
         'brand': 'CAR'
       },
       success: (res) => {
+        console.log(res, '---------------------')
+        wx.hideToast()
         if (res.statusCode == 401) {
           login()
-          return
-        }
-        if (res.statusCode == 500) {
-          resolve(res)
-          wx.showModal({
-            title: '小提示',
-            content: res.data.message,
-            confirmColor: '#ffaf0e',
-            showCancel: false
-          })
-          return
+
         }
 
-        resolve(res)
+
+        if (res.data.status == 0) {
+          resolve(res)
+        } else {
+          if (res.data.status == 9000 | res.data.status == 1001 | res.data.status == 2003) {
+            wx.showModal({
+              title: '提示',
+              content: '网络错误或技术错误，请与管理员联系',
+              confirmColor: '#ffaf0e',
+              showCancel: false
+            })
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: res.data.message,
+              confirmColor: '#ffaf0e',
+              showCancel: false
+            })
+          }
+
+        }
       },
       fail: (error) => {
+        wx.hideToast()
         wx.showModal({
           title: '错误提示',
           content: '网络出错，请稍候'
@@ -66,16 +81,16 @@ const get = (path, params, showToast) => {
     })
   })
 }
-const put = (path, params, showToast) => {
+const put = (path, params) => {
   const newParams = { ...params }
   const token = store.get('token')
 
-  if (showToast) {
-    wx.showToast({
-      title: '正在加载...',
-      icon: 'loading'
-    })
-  }
+
+  wx.showToast({
+    title: '正在加载...',
+    icon: 'loading'
+  })
+
 
   return new Promise((resolve) => {
     wx.request({
@@ -88,28 +103,31 @@ const put = (path, params, showToast) => {
         'brand': 'CAR'
       },
       success: (res) => {
-        console.log(res, 'ya=============')
+        wx.hideToast()
+
         if (res.statusCode == 401) {
           login()
           return
+
         }
-        if (res.statusCode == 500) {
-          resolve(res)
+        if (res.statusCode != 200) {
+          console.log(res, 'test---------------------')
           wx.showModal({
-            title: '小提示',
-            content: res.data.message,
+            title: '提示',
+            content: res.errMsg,
             confirmColor: '#ffaf0e',
             showCancel: false
           })
           return
         }
 
-        wx.hideToast()
+
         // if (res.data.status != 0) {
 
         resolve(res)
       },
       fail: (error) => {
+        wx.hideToast()
         wx.showModal({
           title: '错误提示',
           content: '网络出错，请稍候'
@@ -119,16 +137,16 @@ const put = (path, params, showToast) => {
   })
 }
 
-const postHasToken = (path, params, showToast) => {
+const postHasToken = (path, params) => {
   const newParams = { ...params }
   const token = store.get('token')
   console.log(token, '---------------------')
-  if (showToast) {
-    wx.showToast({
-      title: '正在加载...',
-      icon: 'loading'
-    })
-  }
+
+  wx.showToast({
+    title: '正在加载...',
+    icon: 'loading'
+  })
+
 
   return new Promise((resolve) => {
     wx.request({
@@ -143,17 +161,39 @@ const postHasToken = (path, params, showToast) => {
         'Content-Type': 'application/json;charset=UTF-8'
       },
       success: (res) => {
+        wx.hideToast()
         console.log(res, '==========kun')
         if (res.statusCode == 401) {
           login()
           return
+
         }
+        // if (res.statusCode = 500) {
+        //   console.log(res, 'test---------------------')
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: res.data.message,
+        //     confirmColor: '#ffaf0e',
+        //     showCancel: false
+        //   })
+        //   return
+        // }
+        // if (res.statusCode != 200) {
+        //   console.log(res, 'test---------------------')
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: res.errMsg,
+        //     confirmColor: '#ffaf0e',
+        //     showCancel: false
+        //   })
+        //   return
+        // }
         if (res.data.status == 0) {
           resolve(res)
         } else {
-          resolve(res)
+
           wx.showModal({
-            title: '小提示',
+            title: '提示',
             content: res.data.message,
             confirmColor: '#ffaf0e',
             showCancel: false
@@ -161,25 +201,23 @@ const postHasToken = (path, params, showToast) => {
         }
       },
       fail: () => {
-        wx.showToast({
-          title: '网络出错',
-
-          mask: true,
-          duration: 1500
+        wx.showModal({
+          title: '错误提示',
+          content: '网络出错，请稍候'
         })
       }
     })
   })
 }
-const post = (path, params, showToast) => {
+const post = (path, params) => {
   const newParams = { ...params }
 
-  if (showToast) {
-    wx.showToast({
-      title: '正在加载...',
-      icon: 'loading'
-    })
-  }
+
+  wx.showToast({
+    title: '正在加载...',
+    icon: 'loading'
+  })
+
 
   return new Promise((resolve) => {
     wx.request({
@@ -193,9 +231,20 @@ const post = (path, params, showToast) => {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: (res) => {
+        wx.hideToast()
         if (res.statusCode == 401) {
           login()
           return
+
+        }
+        if (res.statusCode != 200) {
+          console.log(res, 'test---------------------')
+          wx.showModal({
+            title: '提示',
+            content: res.errMsg,
+            confirmColor: '#ffaf0e',
+            showCancel: false
+          })
         }
         if (res.data.status == 0) {
           // store.set('token', res.data.data.token)
@@ -210,11 +259,10 @@ const post = (path, params, showToast) => {
         }
       },
       fail: () => {
-        wx.showToast({
-          title: '网络出错',
-
-          mask: true,
-          duration: 1500
+        wx.hideToast()
+        wx.showModal({
+          title: '错误提示',
+          content: '网络出错，请稍候'
         })
       }
     })

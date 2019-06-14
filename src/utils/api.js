@@ -1,7 +1,7 @@
 import http from './http.js';
 
 // Get External User Profiles
-export const getExternals = params => http.postHasToken('wechat-enterprise/v1/external/users/profiles',params);
+export const getExternals = params => http.postHasToken('wechat-enterprise/v1/external/users/profiles', params);
 // JS Code to Session
 export const wxLogin = params => http.post('wechat-enterprise/v1/api/jscode_to_session', params);
 // Get CDB Customer

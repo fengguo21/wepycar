@@ -9,100 +9,157 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    modalName: '',
+    chatUserId: '',
+    selecting: false,
 
     userInfo: {},
-    users: [{ "externalUserId": "wmdb3IDgAA-Vztf7iXpOlBZ2qoCaejOA", "bind": true, "cdbId": "1234", "bindingDate": "2019-05-23 11:34:51", "name": "test.external", "avatar": "http://p.qlogo.cn/bizmail/IcsdgagqefergqerhewSdage/0" }, { "externalUserId": "wmdb3IDgAA-adfadfdpOldafDaFaejAD", "bind": false, "name": "test.external", "avatar": "http://p.qlogo.cn/bizmail/Adfad3efergqerhewSdage/0" }],
+    users: [],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   // 事件处理函数
 
-  getExternals(userIds) {
-    console.log(userIds, '======ren')
+  getExternals(userIds, tag) {
+
     getExternals({ 'externalUserIds': userIds }).then(res => {
       this.setData({
         users: res.data.data
 
       })
+      if (tag == 1) {
+        console.log('tag====1')
+        let user = res.data.data[0]
+
+        if (user.bind == false) {
+          store.set('currentCustomer', res.data.data[0])
+          wx.navigateTo({
+            url: '/pages/detail/detail?from=index'
+          })
+        } else if (user.bind == true) {
+          wx.showModal({
+            title: '提示',
+            content: '顾客已完成绑定,跳转到顾客详情页？',
+            success(res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                wx.navigateToMiniProgram({
+                  appId: 'wx1ea318c84338cee5',
+                  path: 'pages/client/customerInfo/customerInfo?id=' + user.externalUserId,
+
+                  success(res) {
+                    // 打开成功
+                  }
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+
+        }
+      } else {
+        console.log('tag====0')
+      }
+
 
     })
   },
   selectExternal() {
-    let self = this
-    wx.qy.selectExternalContact({
-      filterType: 0, // 0表示展示全部外部联系人列表，1表示仅展示未曾选择过的外部联系人。默认值为0；除了0与1，其他值非法。
-      success: function (res) {
-        var userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
 
-        self.getExternals(userIds)
-      }
-    })
+    let self = this
+
+    if (this.data.selecting == false) {
+      self.setData({
+        selecting: true
+      })
+      wx.qy.selectExternalContact({
+        filterType: 0, // 0表示展示全部外部联系人列表，1表示仅展示未曾选择过的外部联系人。默认值为0；除了0与1，其他值非法。
+        success: function (res) {
+          var userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
+
+          self.getExternals(userIds)
+        },
+        complete: function () {
+          self.setData({
+            selecting: false
+          })
+        }
+      })
+    }
+
   },
   onLoad: function () {
-    console.log(this.data.users, '======')
+    // if (store.get('myusers')) {
+    //   this.setData({
+    //     users: store.get('myusers')
+    //   })
+
+    // } else {
+
+
+    // }
+
+
+
+
+  },
+  onShow: function (options) {
+
     let self = this
+
     let userIds = []
     wx.qy.getCurExternalContact({
       success: function (res) {
 
         var userId = res.userId //返回当前外部联系人userId
+        console.log(userId, 'rrrr    userid')
+        if (userId == self.data.chatUserId) {
+          console.log('same--------------')
+          return
+        }
         if (userId) {
+          console.log(userId, 'yyyyy    userid')
+          self.setData({
+            chatUserId: userId
+          })
           userIds.push(userId)
-          self.getExternals(userIds)
+          self.getExternals(userIds, 1)
 
         }
 
       },
       fail: function () {
 
+        wx.qy.getCurExternalContact({
+          success: function (res) {
+            var userId = res.userId //返回当前外部联系人userId
+            console.log(userId, 'second    userid')
+            if (userId) {
+              self.setData({
+                chatUserId: userId
+              })
+              userIds.push(userId)
+              self.getExternals(userIds, 1)
+
+            }
+
+          }
+        })
       }
     })
 
   },
-  onShow: function () {
-    let self = this
-    let userIds = []
-    wx.qy.getCurExternalContact({
-      success: function (res) {
 
-        var userId = res.userId //返回当前外部联系人userId
-        if (userId) {
-          userIds.push(userId)
-          self.getExternals(userIds)
-
-        }
-
-      },
-      fail: function () {
-
-      }
-    })
-
-
-
-  },
-  showModal(e) {
-    console.log('test---------')
-    this.setData({
-      modalName: 'Modal'
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
-    })
-  },
   toDetail(e) {
     let user = e.currentTarget.dataset.item
-    console.log(e.currentTarget.dataset.item, '================')
+
     if (user.bind == true) {
-      this.showModal()
+
       return
     }
     store.set('currentCustomer', user)
     wx.navigateTo({
-      url: '/pages/detail/detail'
+      url: '/pages/detail/detail?from=index'
     })
   },
   onShareAppMessage: function () {

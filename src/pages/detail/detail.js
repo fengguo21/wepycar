@@ -7,6 +7,8 @@ Page({
    * Page initial data
    */
   data: {
+    users: [],
+
     isChecked: false,
     user: '',
     cdbNumber: '',
@@ -15,65 +17,71 @@ Page({
     modalName: ''
 
   },
-  getCdb(cdbNumber, externalUserId) {
-    this.setData({
-      loadModal: true
-    })
+  getCdb() {
+
     getCdb({ cdbNumber: this.data.cdbNumber, externalUserId: this.data.user.externalUserId }).then(res => {
-      this.setData({
-        cdbInfo: res.data.data,
-        loadModal: false
-      })
-      console.log(this.data.cdbInfo, '=================')
+
+      if (res) {
+        console.log(res, '==========')
+        let cdbInfo = res.data.data
+        if (cdbInfo.country == '') {
+          cdbInfo.country = 'CN'
+        }
+        this.setData({
+          cdbInfo: cdbInfo,
+          cdbNumber: '',
+          isChecked: true
+
+        })
+      }
+
+
     })
   },
   bindCustomer(params) {
-    this.setData({
-      loadModal: true
-    })
+
     console.log(params, 'params--')
     bindCustomer(params).then(res => {
-      console.log(res, '===========bind')
+
       this.setData({
 
         loadModal: false
       })
-      if (res.statusCode == 200) {
-        let saName = res.data.data.saName
+      if (res.data.status == 0) {
+        let saName = ''
+        let boutique = ''
+        if (res.data.data.saName) {
 
-        wx.navigateTo({
-          url: '/pages/binded/binded?saName=' + saName
+          saName = res.data.data.saName
+        }
+        if (res.data.data.boutique) {
+          boutique = res.data.data.boutique
+        }
+
+
+        wx.reLaunch({
+          url: '/pages/binded/binded?saName=' + saName + '&boutique=' + boutique
         })
       }
     })
   },
   check: function (e) {
-    this.getCdb()
-    this.setData({
-      isChecked: true
-    })
+    if (this.data.cdbNumber) {
+      this.getCdb()
+
+    }
+
+
   },
   confirm() {
-    if (!this.data.cdbInfo) {
-      this.showModal()
-      return
-    }
+
     this.bindCustomer({
       externalUserId: this.data.user.externalUserId,
       cdbUserDto: this.data.cdbInfo
     })
   },
-  showModal(e) {
-    console.log('test---------')
-    this.setData({
-      modalName: 'Modal'
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
-    })
-  },
+
+
   recheck() {
     this.setData({
       cdbInfo: '',
@@ -90,11 +98,44 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    let user = store.get('currentCustomer')
-    this.setData({
-      user: user
-    })
-   console.log(user, 'user---')
+    if (options.from = 'index') {
+      let user = store.get('currentCustomer')
+      this.setData({
+        user: user
+      })
+    } else {
+      let self = this
+
+      let userIds = []
+      wx.qy.getCurExternalContact({
+        success: function (res) {
+
+          var userId = res.userId //返回当前外部联系人userId
+          if (userId) {
+            userIds.push(userId)
+            self.getExternals(userIds)
+
+          }
+
+        },
+        fail: function () {
+
+          wx.qy.getCurExternalContact({
+            success: function (res) {
+              var userId = res.userId //返回当前外部联系人userId
+              if (userId) {
+                userIds.push(userId)
+                self.getExternals(userIds)
+
+              }
+
+            }
+          })
+        }
+      })
+    }
+
+
   },
 
   /**
@@ -113,7 +154,10 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
+    console.log('hide')
+    wx.redirectTo({
+      url: "/pages/index/index",
+    })
   },
 
   /**

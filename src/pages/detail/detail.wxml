@@ -1,109 +1,64 @@
-<cu-custom bgColor="bg-theme" isBack="{{true}}">
-  <view slot="content">卡地亚客户绑定</view>
-</cu-custom>
-<view class="cu-list menu-avatar margin-bottom">
-  <view class="cu-item solid-bottom">
-    <view class="cu-avatar radius lg" style="background-image:url({{user.avatar}});"></view>
+<view class="tab">
+  <image class="logo" src="../../images/logo.png" />
+</view>
+<view class="cu-list">
+  <view class="cu-item" style="margin:0;padding:0 16px;height:74px;margin-bottom:5px;">
+    <view class="cu-avatar">
+      <image src="{{user.avatar}}" style='height:50px;width:50px;' />
+    </view>
     <view class="content">
-      <view class="text-pink">
+      <view class="name">
         <text class="text-cut">{{user.name}}</text>
       </view>
-      <view class="text-gray text-sm flex">
-        <text class="text-cut">{{user.bindDate}}</text>
+      <view wx:if="{{user.bind}}">
+        <text class="notbinded">已完成绑定 {{user.cdbId}}</text>
       </view>
-    </view>
-    <view class="action">
-      <!-- <view class="text-grey text-xs">22:20</view> -->
-      <view class="cu-tag round bg-red sm">待添加</view>
-    </view>
-  </view>
-  <view wx:if='{{isChecked}}' class="cu-list menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="cuIcon-form text-mauve"></text>
-        <text class="text-grey">顾客CBD编号</text>
+      <view wx:else>
+        <text class="binded">等待绑定</text>
       </view>
-      <view class="action">
-        <text class="text-grey text-sm">{{cdbInfo.cdbNumber}}</text>
-      </view>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="cuIcon-profile text-mauve"></text>
-        <text class="text-grey">顾客姓名</text>
-      </view>
-      <view class="action">
-        <text class="text-grey text-sm">{{cdbInfo.fullName}}</text>
-      </view>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="cuIcon-profilefill text-mauve"></text>
-        <text class="text-grey">顾客姓名(英语/拼音)</text>
-      </view>
-      <view class="action">
-        <text class="text-grey text-sm">{{cdbInfo.firstNameEn}} {{cdbInfo.lastNameEn}}</text>
-      </view>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="cuIcon-mobile text-mauve"></text>
-        <text class="text-grey">联系电话</text>
-      </view>
-      <view class="action">
-        <text class="text-grey text-sm">{{cdbInfo.mobileNumber}}</text>
-      </view>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="cuIcon-mail text-mauve"></text>
-        <text class="text-grey">电子邮件</text>
-      </view>
-      <view class="action">
-        <text class="text-grey text-sm">{{cdbInfo.email}}</text>
-      </view>
-    </view>
-    <view class="cu-item {{menuArrow?'arrow':''}}">
-      <view class="content">
-        <text class="cuIcon-location text-mauve"></text>
-        <text class="text-grey">地址</text>
-      </view>
-      <view class="action">
-        <text class="text-grey text-sm">{{cdbInfo.billingAddress}}</text>
-      </view>
-    </view>
-    <view class="padding flex flex-direction">
-      <button class="cu-btn bg-grey lg" bindtap='recheck'>重新匹配</button>
-      <button class="cu-btn bg-theme margin-tb-sm lg" bindtap='confirm'>确认绑定</button>
     </view>
   </view>
 </view>
-<view wx:if='{{!isChecked}}'>
-  <view class="flex-sub text-center margin-top ">
-    <view class=" text-xl padding">
-      <text class="text-black text-bold">顾客CDB编号</text>
-    </view>
-    <view class="cu-form-group margin-left margin-right">
-      <input placeholder="CDB编号" type="number" bindinput="inputCdb"></input>
-    </view>
+<view wx:if="{{isChecked}}">
+  <view class="infoItem">
+    <view class="title">顾客CDB编号</view>
+    <view class="value">{{cdbInfo.cdbNumber}}</view>
   </view>
-  <view class="padding flex flex-direction">
-    <button class="cu-btn bg-theme lg " bindtap='check'>查询</button>
+  <view class="infoItem">
+    <view class="title">顾客姓名</view>
+    <view class="value">{{cdbInfo.fullName}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">顾客姓名(英语/拼音)</view>
+    <view class="value">{{cdbInfo.firstNameEn}} {{cdbInfo.lastNameEn}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">联系电话</view>
+    <view class="value">{{cdbInfo.mobileNumber}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">电子邮件</view>
+    <view class="value">{{cdbInfo.email}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">地址</view>
+    <view class="value">{{cdbInfo.billingAddress}}</view>
+  </view>
+  <view class="handle">
+    <view bindtap='recheck' class="reCheck">重新匹配</view>
+    <view bindtap='confirm' class=" bind">确认绑定</view>
   </view>
 </view>
-<view class='cu-load load-modal' wx:if="{{loadModal}}">
-  <view class='cuIcon-emojifill text-orange'></view>
-  <!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
-  <view class='gray-text'>加载中...</view>
-</view>
-<view class="cu-modal  {{modalName=='Modal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">提示</view>
-      <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
-      </view>
+<view wx:if='{{isChecked==false}}'>
+  <view class="checkcdb">
+    <view class="titleWrapper">
+      <text class="title">顾客CDB编号</text>
     </view>
-    <view class="padding-xl">未匹配成功</view>
+    <view class="inputWrapper">
+      <input focus placeholder="CDB编号" type="number" bindinput="inputCdb"></input>
+    </view>
+  </view>
+  <view class="">
+    <button class="cu-btn" bindtap='check'>查询</button>
   </view>
 </view>

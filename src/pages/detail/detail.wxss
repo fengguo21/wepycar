@@ -1,1 +1,102 @@
 /* pages/detail/detail.wxss */
+.infoItem{
+    margin:15px;
+}
+.infoItem .title{
+    font-size:14px;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(0,0,0,1);
+line-height:20px;
+}
+.infoItem .value{
+height:44px;
+background:rgba(254,251,254,1);
+font-size:14px;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(0,0,0,1);
+line-height:20px;
+line-height: 44px;
+text-indent: .5em;
+}
+.checkcdb{
+    margin-top: 145px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.checkcdb .titleWrapper .title{
+font-size:22px;
+font-family:PingFangSC-Medium;
+font-weight:500;
+color:rgba(0,0,0,1);
+line-height:30px;
+
+}
+.checkcdb .inputWrapper input{
+    font-size:14px;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(181,181,181,1);
+line-height:20px;
+text-align: center;
+    width:480px;
+height:44px;
+background:rgba(254,251,254,1);
+border-radius:4px;
+margin-bottom: 38px;
+margin-top: 10px;
+}
+.cu-btn{
+  width:480px;
+height:48px;
+background:rgba(165,1,0,1);
+border-radius:4px;
+font-size:15px;
+font-family:SFNSText;
+color:rgba(255,255,255,1);
+line-height:48px;
+}
+.handle{
+  position: absolute;
+    bottom:15px;
+    display: flex;
+    justify-content: space-between;
+   
+    width:100%;
+    
+
+}
+
+.handle .reCheck{
+    margin-left:15px;
+   
+    width:360px;
+height:44px;
+border-radius:1px;
+border:1px solid rgba(165,1,0,1);
+font-size:15px;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(0,0,0,1);
+line-height:44px;
+text-align: center
+}
+.handle .bind{
+    width:360px;
+height:44px;
+border-radius:1px;
+
+font-size:15px;
+font-family:PingFangSC-Regular;
+font-weight:400;
+
+line-height:44px;
+text-align: center;
+   background:rgba(165,1,0,1);
+   color:white;
+   margin-right: 15px;
+  
+}
