@@ -3,7 +3,6 @@ import { wxLogin, checkToken, refreshToken } from './utils/api.js'
 import * as store from './utils/store.js'
 App({
   onLaunch: function () {
-
     // 获取系统状态栏信息
     wx.getSystemInfo({
       success: e => {
@@ -13,7 +12,7 @@ App({
         let custom = wx.getMenuButtonBoundingClientRect()
         console.log(custom, '=============')
         this.globalData.Custom = custom
-        if (e.environment == 'wxwork') {
+        if (e.environment === 'wxwork') {
           this.globalData.env = e.environment
           this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight + 45
         } else {
@@ -62,10 +61,6 @@ App({
         }
       })
     }
-
-
-
-
   },
   login() {
     // 登录

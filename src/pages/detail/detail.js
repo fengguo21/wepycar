@@ -18,9 +18,7 @@ Page({
 
   },
   getCdb() {
-
     getCdb({ cdbNumber: this.data.cdbNumber, externalUserId: this.data.user.externalUserId }).then(res => {
-
       if (res) {
         console.log(res, '==========')
         let cdbInfo = res.data.data
@@ -34,15 +32,13 @@ Page({
 
         })
       }
-
-
+    }).catch(err => {
+      console.log(err, 'reject--------')
     })
   },
   bindCustomer(params) {
-
     console.log(params, 'params--')
     bindCustomer(params).then(res => {
-
       this.setData({
 
         loadModal: false
@@ -51,13 +47,11 @@ Page({
         let saName = ''
         let boutique = ''
         if (res.data.data.saName) {
-
           saName = res.data.data.saName
         }
         if (res.data.data.boutique) {
           boutique = res.data.data.boutique
         }
-
 
         wx.reLaunch({
           url: '/pages/binded/binded?saName=' + saName + '&boutique=' + boutique
@@ -68,19 +62,14 @@ Page({
   check: function (e) {
     if (this.data.cdbNumber) {
       this.getCdb()
-
     }
-
-
   },
   confirm() {
-
     this.bindCustomer({
       externalUserId: this.data.user.externalUserId,
       cdbUserDto: this.data.cdbInfo
     })
   },
-
 
   recheck() {
     this.setData({
@@ -109,33 +98,25 @@ Page({
       let userIds = []
       wx.qy.getCurExternalContact({
         success: function (res) {
-
-          var userId = res.userId //返回当前外部联系人userId
+          var userId = res.userId // 返回当前外部联系人userId
           if (userId) {
             userIds.push(userId)
             self.getExternals(userIds)
-
           }
-
         },
         fail: function () {
-
           wx.qy.getCurExternalContact({
             success: function (res) {
-              var userId = res.userId //返回当前外部联系人userId
+              var userId = res.userId // 返回当前外部联系人userId
               if (userId) {
                 userIds.push(userId)
                 self.getExternals(userIds)
-
               }
-
             }
           })
         }
       })
     }
-
-
   },
 
   /**
@@ -149,14 +130,13 @@ Page({
    * Lifecycle function--Called when page show
    */
 
-
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
     console.log('hide')
     wx.redirectTo({
-      url: "/pages/index/index",
+      url: '/pages/index/index'
     })
   },
 
