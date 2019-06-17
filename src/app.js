@@ -24,11 +24,9 @@ App({
     if (this.globalData.env == 'wxwork') {
       wx.qy.checkSession({
         success: function () {
-          console.log('success')
           checkToken().then(res => {
             if (res.data.status == 0 & res.data.data == false) {
               refreshToken().then(res => {
-                console.log(res, 'refresh')
               })
             }
 
@@ -58,6 +56,6 @@ App({
   },
 
   globalData: {
-    userInfo: null
+
   }
 })

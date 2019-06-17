@@ -4,10 +4,6 @@ import base from config.js
 import brand from config.js
 import agentId from config.js
 import type from config.js
-const base = 'https://preprod.api.rwef.richemont.cn'
-const brand = 'CAR'
-const agentId = agentId
-const type = type
 import { wxLogin } from './api.js'
 
 const login = function () {
