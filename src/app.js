@@ -40,12 +40,15 @@ App({
               // 发送 res.code 到后台换取 openId, sessionKey, unionId
               wxLogin({
                 code: res.code,
-                brand: brand,
+                brand: 'CAR',
                 agentId: '1000007',
                 type: 'binding'
 
               }).then(res => {
+                console.log('login-------------------')
                 store.set('token', res.token)
+              }).catch(err => {
+                console.log(err, 'login-------------------')
               })
             }
           })

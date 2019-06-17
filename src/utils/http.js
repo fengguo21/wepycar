@@ -18,8 +18,10 @@ const login = function () {
         type: 'binding'
 
       }).then(res => {
+        console.log('login-------------------')
         store.set('token', res.data.data.token)
       }).catch(err => {
+        console.log(err, 'login-------------------')
       })
     }
   })
