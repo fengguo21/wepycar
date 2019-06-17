@@ -9,10 +9,3 @@ export const set = (key, value) => {
   wx.setStorageSync(`${APP_ID}-${key}`, value);
 };
 
-export const remove = (key) => {
-  wx.removeStorageSync(`${APP_ID}-${key}`);
-};
-
-export const clear = () => {
-  wx.clearStorageSync();
-};

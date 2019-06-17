@@ -1,12 +1,6 @@
 const app = getApp();
 Component({
-  /**
-   * 组件的一些选项
-   */
-  options: {
-    addGlobalClass: true,
-    multipleSlots: true
-  },
+
   /**
    * 组件的对外属性
    */
@@ -16,6 +10,10 @@ Component({
     isShow: {
       type: [Boolean, String],
       default: false
+    },
+    errinfo: {
+      type: [String],
+      default: ''
     },
 
   },
@@ -34,10 +32,6 @@ Component({
         isShow: !this.data.isShow
       })
     },
-    toHome() {
-      wx.reLaunch({
-        url: '/pages/index/index',
-      })
-    }
+
   }
 })

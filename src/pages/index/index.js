@@ -7,11 +7,11 @@ const app = getApp()
 
 Page({
   data: {
-    StatusBar: app.globalData.StatusBar,
-    CustomBar: app.globalData.CustomBar,
+
     chatUserId: '',
     selecting: false,
-    modelShow: true,
+    modelShow: false,
+    errinfo: '',
     userInfo: {},
     users: [],
     hasUserInfo: false,
@@ -27,7 +27,7 @@ Page({
 
       })
       if (tag == 1) {
-        console.log('tag====1')
+
         let user = res.data.data[0]
 
         if (user.bind == false) {
@@ -58,9 +58,16 @@ Page({
 
         }
       } else {
-        console.log('tag====0')
+
       }
 
+
+    }).catch(err => {
+
+      this.setData({
+        modelShow: true,
+        errinfo: err
+      })
 
     })
   },
@@ -80,7 +87,7 @@ Page({
           self.getExternals(userIds)
         },
         fail: function (err) {
-          console.log(res, 'fail-------------')
+
         },
         complete: function () {
           self.setData({
@@ -92,15 +99,6 @@ Page({
 
   },
   onLoad: function () {
-    // if (store.get('myusers')) {
-    //   this.setData({
-    //     users: store.get('myusers')
-    //   })
-
-    // } else {
-
-
-    // }
 
 
 
@@ -117,7 +115,7 @@ Page({
         var userId = res.userId //返回当前外部联系人userId
         console.log(userId, 'rrrr    userid')
         if (userId == self.data.chatUserId) {
-          console.log('same--------------')
+
           return
         }
         if (userId) {
@@ -170,7 +168,7 @@ Page({
   },
 
   getUserInfo: function (e) {
-    console.log(e)
+
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

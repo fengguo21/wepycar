@@ -1,3 +1,4 @@
+<cu-custom isShow="{{modelShow}}" errinfo='{{errinfo}}'></cu-custom>
 <view class="tab">
   <image class="logo" src="../../images/logo.png" />
 </view>

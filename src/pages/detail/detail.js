@@ -8,19 +8,19 @@ Page({
    */
   data: {
     users: [],
-
+    modelShow: false,
     isChecked: false,
     user: '',
     cdbNumber: '',
     cdbInfo: '',
-    loadModal: false,
-    modalName: ''
+    errinfo: '',
+
 
   },
   getCdb() {
     getCdb({ cdbNumber: this.data.cdbNumber, externalUserId: this.data.user.externalUserId }).then(res => {
       if (res) {
-        console.log(res, '==========')
+
         let cdbInfo = res.data.data
         if (cdbInfo.country == '') {
           cdbInfo.country = 'CN'
@@ -33,7 +33,14 @@ Page({
         })
       }
     }).catch(err => {
-      console.log(err, 'reject--------')
+      if (err) {
+        this.setData({
+          modelShow: true,
+          errinfo: err
+
+        })
+      }
+
     })
   },
   bindCustomer(params) {
@@ -57,6 +64,15 @@ Page({
           url: '/pages/binded/binded?saName=' + saName + '&boutique=' + boutique
         })
       }
+    }).catch(err => {
+      if (err) {
+        this.setData({
+          modelShow: true,
+          errinfo: err
+
+        })
+      }
+
     })
   },
   check: function (e) {
@@ -119,16 +135,6 @@ Page({
     }
   },
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
 
   /**
    * Lifecycle function--Called when page hide
@@ -140,26 +146,7 @@ Page({
     })
   },
 
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
 
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
 
   /**
    * Called when user click on the top right corner to share
