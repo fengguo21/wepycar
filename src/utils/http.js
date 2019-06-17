@@ -1,7 +1,13 @@
 
 import * as store from './store.js'
+import base from config.js
+import brand from config.js
+import agentId from config.js
+import type from config.js
 const base = 'https://preprod.api.rwef.richemont.cn'
-let brand = 'CAR'
+const brand = 'CAR'
+const agentId = agentId
+const type = type
 import { wxLogin } from './api.js'
 
 const login = function () {
@@ -12,13 +18,12 @@ const login = function () {
       wxLogin({
         code: res.code,
         brand: brand,
-        agentId: '1000007',
-        type: 'binding'
+        agentId: agentId,
+        type: type
 
       }).then(res => {
         store.set('token', res.data.data.token)
       }).catch(err => {
-        console.log(err, 'reject===========')
       })
     }
   })
@@ -35,9 +40,7 @@ const http = (path, params, method, head) => {
     }
   }
   if (head === 'head2') {
-    console.log('head2------')
     header = {
-
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   }
@@ -61,7 +64,6 @@ const http = (path, params, method, head) => {
       method: method,
       header: header,
       success: (res) => {
-        console.log(res, '---------------------')
         wx.hideToast()
         if (res.statusCode == 401) {
           login()
@@ -92,18 +94,12 @@ const http = (path, params, method, head) => {
           } else if (res.data.status == 9000) {
             reject('【错误代码9000】SWSE绑定失败，请检查CDB中手机号及中英文是否补全，补全后再绑定；如CDB信息全面，请与管理员联系。')
           } else {
-            wx.showModal({
-              title: '提示',
-              content: res.data.message,
-              confirmColor: '#ffaf0e',
-              showCancel: false
-            })
+            reject(res.data.message)
           }
         }
       },
       fail: (error) => {
         wx.hideToast()
-        console.log(error, 'rejecr-----')
         let errinfo = '网络错误，请检查'
         reject(errinfo)
       }

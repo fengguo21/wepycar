@@ -14,8 +14,7 @@ Page({
     errinfo: '',
     userInfo: {},
     users: [],
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+
   },
   // 事件处理函数
 
@@ -113,16 +112,11 @@ Page({
       success: function (res) {
 
         var userId = res.userId //返回当前外部联系人userId
-        console.log(userId, 'rrrr    userid')
-        if (userId == self.data.chatUserId) {
 
-          return
-        }
+
         if (userId) {
           console.log(userId, 'yyyyy    userid')
-          self.setData({
-            chatUserId: userId
-          })
+
           userIds.push(userId)
           self.getExternals(userIds, 1)
 
