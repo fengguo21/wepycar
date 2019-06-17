@@ -1,9 +1,7 @@
 // app.js
 import { wxLogin, checkToken, refreshToken } from './utils/api.js'
 import * as store from './utils/store.js'
-import brand from config.js
-import agentId from config.js
-import type from config.js
+
 App({
   onLaunch: function () {
     // 获取系统状态栏信息
@@ -38,12 +36,13 @@ App({
           // session_key 已经失效，需要重新执行登录流程
           wx.qy.login({
             success: res => {
+
               // 发送 res.code 到后台换取 openId, sessionKey, unionId
               wxLogin({
                 code: res.code,
                 brand: brand,
-                agentId: agentId,
-                type: type
+                agentId: '1000007',
+                type: 'binding'
 
               }).then(res => {
                 store.set('token', res.token)

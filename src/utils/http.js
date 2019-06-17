@@ -1,10 +1,10 @@
 
 import * as store from './store.js'
-import base from config.js
-import brand from config.js
-import agentId from config.js
-import type from config.js
+const base = 'https://preprod.api.rwef.richemont.cn'
+const brand = 'CAR'
+
 import { wxLogin } from './api.js'
+
 
 const login = function () {
   wx.qy.login({
@@ -14,8 +14,8 @@ const login = function () {
       wxLogin({
         code: res.code,
         brand: brand,
-        agentId: agentId,
-        type: type
+        agentId: '1000007',
+        type: 'binding'
 
       }).then(res => {
         store.set('token', res.data.data.token)
@@ -60,6 +60,7 @@ const http = (path, params, method, head) => {
       method: method,
       header: header,
       success: (res) => {
+        console.log(res, '------------------')
         wx.hideToast()
         if (res.statusCode == 401) {
           login()

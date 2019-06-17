@@ -5,12 +5,28 @@
     <image class="add" src="../../images/add.png" bindtap='selectExternal' />
   </view>
 </view>
-<view class="cu-list">
+<view class="content" wx:if="{{shwoDetail==true}}">
+  <image class="avatar" src="{{user.avatar}}" />
+  <view class="bindedName">{{user.name}}</view>
+  <view class="bindedinfo">
+    <view class='cdb' style="margin-right:30px">已完成绑定 {{user.cdbId}}</view>
+    <view class='date'>{{user.bindDate}}</view>
+  </view>
+  <view class="greeting indexpage">
+    <view class="header">提示</view>
+    <view class="tips">顾客已完成绑定，跳转到顾客详情页？</view>
+  </view>
+  <view class="bottomBtns">
+    <button class="cancel" bindtap='cancelToWarm'>取消</button>
+    <button class="confirm" bindtap='toWarm'>确认</button>
+  </view>
+</view>
+<view class="cu-list" wx:else>
   <view class="cu-item" wx:for="{{users}}" bindtap='toDetail' data-item="{{item}}">
     <view class="cu-avatar">
       <image src="{{item.avatar}}" />
     </view>
-    <view class="content">
+    <view class="contents">
       <view class="name">
         <text class="text-cut">{{item.name}}</text>
       </view>
