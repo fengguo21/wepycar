@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/binded/binded"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#4c77b6",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "顾客绑定"
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx1ea318c84338cee5"
+  ],
+  "usingComponents": {
+    "cu-custom": "/components/cu-custom"
+  },
+  "resizable": true,
+  "sitemapLocation": "sitemap.json"
+}

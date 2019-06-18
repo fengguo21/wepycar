@@ -1,0 +1,65 @@
+<cu-custom is-show="{{modelShow}}" err-info="{{errInfo}}"></cu-custom>
+<view class="tab">
+  <image class="logo" src="../../images/logo.png" />
+</view>
+<view class="cu-list">
+  <view class="cu-item" style="margin:0;padding:0 16px;height:74px;margin-bottom:5px;">
+    <view class="cu-avatar">
+      <image src="{{user.avatar}}" style="height:50px;width:50px;" />
+    </view>
+    <view class="contents">
+      <view class="name">
+        <text class="text-cut">{{user.name}}</text>
+      </view>
+      <view wx:if="{{user.bind}}">
+        <text class="notbinded">已完成绑定 {{user.cdbId}}</text>
+      </view>
+      <view wx:else>
+        <text class="binded">等待绑定</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{isChecked}}">
+  <view class="infoItem">
+    <view class="title">顾客CDB编号</view>
+    <view class="value">{{cdbInfo.cdbNumber}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">顾客姓名</view>
+    <view class="value">{{cdbInfo.fullName}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">顾客姓名(英语/拼音)</view>
+    <view class="value">{{cdbInfo.firstNameEn}} {{cdbInfo.lastNameEn}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">联系电话</view>
+    <view class="value">{{cdbInfo.mobileNumber}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">电子邮件</view>
+    <view class="value">{{cdbInfo.email}}</view>
+  </view>
+  <view class="infoItem">
+    <view class="title">地址</view>
+    <view class="value">{{cdbInfo.billingAddress}}</view>
+  </view>
+  <view class="handle">
+    <view bindtap="recheck" class="reCheck">重新匹配</view>
+    <view bindtap="confirm" class=" bind">确认绑定</view>
+  </view>
+</view>
+<view wx:if="{{isChecked==false}}">
+  <view class="checkcdb">
+    <view class="titleWrapper">
+      <text class="title">顾客CDB编号</text>
+    </view>
+    <view class="inputWrapper">
+      <input focus maxlength="7" placeholder="请输入CDB编号" type="number" bindinput="inputCdb" />
+    </view>
+  </view>
+  <view class="">
+    <button class="cu-btn" bindtap="check">查找</button>
+  </view>
+</view>
