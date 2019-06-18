@@ -1,8 +1,6 @@
-const APP_ID = 'wx752c282e61fdd08a';
-
-
-export const get = key => wx.getStorageSync(`${APP_ID}-${key}`);
+import { appid } from './config.js'
+export const get = key => wx.getStorageSync(`${appid}-${key}`);
 export const set = (key, value) => {
-  wx.setStorageSync(`${APP_ID}-${key}`, value);
+  wx.setStorageSync(`${appid}-${key}`, value);
 };
 

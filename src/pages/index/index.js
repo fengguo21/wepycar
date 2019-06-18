@@ -1,9 +1,6 @@
-// index.js
-// import * as store from '../../utils/store.js';
-// 获取应用实例
-const app = getApp()
 import * as store from '../../utils/store.js'
 import { getExternals } from '../../utils/api.js'
+const app = getApp()
 Page({
   data: {
     selecting: false,
@@ -12,17 +9,14 @@ Page({
     user: {},
     users: [],
     shwoDetail: false,
-
     curUserId: ''
   },
   // 事件处理函数
-
   getExternals(userIds, tag) {
     getExternals({ 'externalUserIds': userIds }).then(res => {
-
       if (tag === 1) {
         let user = res.data.data[0]
-        if (user.bind === false) {
+        if (!user.bind) {
           store.set('currentCustomer', res.data.data[0])
           wx.navigateTo({
             url: '/pages/detail/detail?from=index'
@@ -36,12 +30,10 @@ Page({
       } else {
         this.setData({
           users: res.data.data,
-
         })
         app.globalData.scene = ''
       }
     }).catch(err => {
-
       this.setData({
         modelShow: true,
         errinfo: err
@@ -53,13 +45,13 @@ Page({
       appId: 'wx1ea318c84338cee5',
       path: 'pages/client/customerInfo/customerInfo?id=' + this.data.user.externalUserId,
       success(res) {
-        // 打开成功
       }
     })
   },
   cancelToWarm() {
+    app.globalData.scene = ''
     this.setData({
-      shwoDetail: false
+      shwoDetail: false,
     })
   },
   selectExternal() {
@@ -72,7 +64,6 @@ Page({
         filterType: 0, // 0表示展示全部外部联系人列表，1表示仅展示未曾选择过的外部联系人。默认值为0；除了0与1，其他值非法。
         success: function (res) {
           var userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
-
           self.getExternals(userIds, 0)
         },
         fail: function (err) {
@@ -94,10 +85,8 @@ Page({
         success: function (res) {
           var userId = res.userId //返回当前外部联系人userId
           if (userId) {
-
             self.setData({
               curUserId: userId,
-
             })
             userIds.push(userId)
             self.getExternals(userIds, 1)
@@ -109,7 +98,6 @@ Page({
               var userId = res.userId //返回当前外部联系人userId
               console.log(userId, 'second    userid')
               if (userId) {
-
                 userIds.push(userId)
                 self.getExternals(userIds, 1)
               }
@@ -118,8 +106,6 @@ Page({
         }
       })
     }
-
-
   },
   toDetail(e) {
     let user = e.currentTarget.dataset.item
@@ -130,6 +116,5 @@ Page({
     wx.navigateTo({
       url: '/pages/detail/detail?from=index'
     })
-  },
-
+  }
 })

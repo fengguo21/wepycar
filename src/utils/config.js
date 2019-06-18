@@ -1,10 +1,11 @@
-export const APP_ID = 'wx752c282e61fdd08a';
+export const appid = 'wx752c282e61fdd08a';
 export const base = 'https://preprod.api.rwef.richemont.cn'
 export const brand = 'CAR'
 export const agentId = '1000007'
 export const type = 'binding'
 export const errInfo = {
     400: '【错误代码400】请求错误，请重试或与管理员联系。',
+    500: '【错误代码500】网络错误或技术错误，请与管理员联系。',
     401: '【错误代码401】登录信息错误或已失效，请重试。',
     403: '【错误代码403】无访问权限，请联系管理员。',
     404: '【错误代码404】该信息不存在，请稍后重试或与管理员联系。',
@@ -24,5 +25,4 @@ export const errInfo = {
     9056: '【错误代码9056】NSI绑定失败，请检查CDB中手机号及中英文是否补全，补全后再绑定；如CDB信息全面，请与管理员联系。',
     9000: '【错误代码9000】SWSE绑定失败，请检查CDB中手机号及中英文是否补全，补全后再绑定；如CDB信息全面，请与管理员联系。',
     999: '【错误代码999】仅允许在历峰安全网络内访问。'
-
 }

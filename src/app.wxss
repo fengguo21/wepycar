@@ -1,176 +1,186 @@
-.tab{
-    width:100%;
-height:49px;
+.tab {
+  width: 100%;
+  height: 49px;
   display: block;
   position: relative;
-  background: rgba(255,255,255,1);
-  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.12);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
   overflow: hidden;
 }
-.tab .addWrapper{
-     position: absolute;
-    height: 49px;
-    width:49px;
-    right: 0;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.tab .addWrapper {
+  position: absolute;
+  height: 49px;
+  width: 49px;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.tab .add{
-   
-    height: 20px;
-    width:20px;
-   
-   
-    
+.tab .add {
+  height: 20px;
+  width: 20px;
 }
-.tab .logo{
-   width:72px;
-   height: 20px;
+
+.tab .logo {
+  width: 72px;
+  height: 20px;
   display: block;
   margin: 15px auto;
   padding: 0;
-    display: block;
-   
+  display: block;
 }
-.cu-list .cu-item{
-    display: flex;
-height:68px;
-margin:0 16px;
-border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
-}
-.cu-item .contents{
-    margin:14px 0;
-font-size:16px;
-font-family:PingFangSC-Medium;
-font-weight:500;
-color:rgba(64,64,64,1);
-line-height:22px;
-}
-.cu-item .contents .binded{
-    font-size:13px;
-font-family:SFNSText;
-color:rgba(163,0,0,1);
-line-height:16px;
-}
-.cu-item .contents .notbinded{
-    font-weight:400;
-color:rgba(191,191,191,1);
-line-height:18px;
-}
-.cu-avatar image{
-    width:44px;
-height:44px;
-margin:11px 16px 11px 0;
-border-radius:4px;
-}
-.rightInfo{
-    flex:1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    float: right;
-}
-.rightInfo .arrow {
-    width:18px;
-    height: 18px;
-}
-.rightInfo .arrow image{
-    width:18px;
-    height: 18px;
 
-    
+.cu-list .cu-item {
+  display: flex;
+  height: 68px;
+  margin: 0 16px;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
 }
-.rightInfo .date{
-    font-size:12px;
-font-family:PingFangSC-Regular;
-font-weight:400;
-color:rgba(181,181,181,1);
-line-height:17px;
-line-height: 68px;
+
+.cu-item .contents {
+  margin: 14px 0;
+  font-size: 16px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(64, 64, 64, 1);
+  line-height: 22px;
+}
+
+.cu-item .contents .binded {
+  font-size: 14px;
+  font-family: SFNSText;
+  color: rgba(163, 0, 0, 1);
+  line-height: 16px;
+}
+
+.cu-item .contents .notbinded {
+  font-weight: 400;
+  color: rgba(191, 191, 191, 1);
+  line-height: 18px;
+}
+
+.cu-avatar image {
+  width: 44px;
+  height: 44px;
+  margin: 11px 16px 11px 0;
+  border-radius: 4px;
+}
+
+.rightInfo {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  float: right;
+}
+
+.rightInfo .arrow {
+  width: 18px;
+  height: 18px;
+}
+
+.rightInfo .arrow image {
+  width: 18px;
+  height: 18px;
+}
+
+.rightInfo .date {
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(181, 181, 181, 1);
+  line-height: 17px;
+  line-height: 68px;
 }
 
 /* pages/binded/binded.wxss */
-.content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.content .avatar{
-    margin-top: 77px;
-    margin-bottom: 27px;
-    width:100px;
-height:100px;
-border-radius:4px;
-}
-.content .name{
-font-size:22px;
-font-family:PingFangSC-Medium;
-font-weight:500;
-color:rgba(0,0,0,1);
-line-height:30px;
-}
-.content .title{
-    font-size:22px;
-font-family:PingFangSC-Semibold;
-font-weight:600;
-color:rgba(163,0,0,1);
-line-height:30px;
-margin-top: 32px;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.content .greeting{
-     
-width:454px;
-height:161px;
-font-size:14px;
-font-family:PingFangSC-Regular;
-font-weight:400;
-color:rgba(64,64,64,1);
-line-height:28px;
-box-shadow:0px -2px 6px 0px rgba(0,0,0,0.04);
-border-radius:2px;
-padding:15px;
-margin:15px 0;
-
-}
-.greeting .message{
- border-top: 1px solid #f6efe3;
-}
-.greeting .message span{
- border-bottom: 1px solid #f6efe3;
-padding-bottom:4px;
-}
-.line{
-    border-top: 2px solid #DABA82;
-    opacity: .45;
-}
-.greeting .title{
-    font-size:15px;
-font-family:PingFangSC-Semibold;
-font-weight:600;
-color:rgba(190,161,110,1);
-line-height:21px;
-
-}
-.send{
-    width:320px;
-height:44px;
-background:rgba(165,1,0,1);
-border-radius:1px;
-font-size:15px;
-font-family:SFNSText;
-color:rgba(255,255,255,1);
-line-height:44px;
-}
-.tips{
-    font-size:13px;
-font-family:AppleSystemUIFont;
-color:rgba(181,181,181,1);
-line-height:16px;
-margin-top: 15px;
+.content .avatar {
+  margin-top: 77px;
+  margin-bottom: 27px;
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
 }
 
+.content .name {
+  font-size: 22px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  line-height: 30px;
+}
+
+.content .title {
+  font-size: 22px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  color: rgba(163, 0, 0, 1);
+  line-height: 30px;
+  margin-top: 32px;
+}
+
+.content .greeting {
+  width: 454px;
+  height: 161px;
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(64, 64, 64, 1);
+  line-height: 28px;
+  box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.greeting .message {
+  border-top: 1px solid #f6efe3;
+}
+
+.greeting .message span {
+  border-bottom: 1px solid #f6efe3;
+  padding-bottom: 4px;
+}
+
+.line {
+  border-top: 2px solid #daba82;
+  opacity: 0.45;
+}
+
+.greeting .title {
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  color: rgba(190, 161, 110, 1);
+  line-height: 21px;
+}
+
+.send {
+  width: 320px;
+  height: 44px;
+  background: rgba(165, 1, 0, 1);
+  border-radius: 1px;
+  font-size: 16px;
+  font-family: SFNSText;
+  color: rgba(255, 255, 255, 1);
+  line-height: 44px;
+}
+
+.tips {
+  font-size: 14px;
+  font-family: AppleSystemUIFont;
+  color: rgba(181, 181, 181, 1);
+  line-height: 16px;
+  margin-top: 15px;
+}

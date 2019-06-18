@@ -1,11 +1,8 @@
-// pages/detail/detail.js
 import * as store from '../../utils/store.js'
 import { getCdb, bindCustomer } from '../../utils/api.js'
+import { errInfo } from '../../utils/config.js'
+const app = getApp()
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     users: [],
     modelShow: false,
@@ -13,14 +10,11 @@ Page({
     user: '',
     cdbNumber: '',
     cdbInfo: '',
-    errinfo: '',
-
-
+    errinfo: ''
   },
   getCdb() {
     getCdb({ cdbNumber: this.data.cdbNumber, externalUserId: this.data.user.externalUserId }).then(res => {
       if (res) {
-
         let cdbInfo = res.data.data
         if (cdbInfo.country === '') {
           cdbInfo.country = 'CN'
@@ -29,7 +23,6 @@ Page({
           cdbInfo: cdbInfo,
           cdbNumber: '',
           isChecked: true
-
         })
       }
     }).catch(err => {
@@ -37,17 +30,13 @@ Page({
         this.setData({
           modelShow: true,
           errinfo: err
-
         })
       }
-
     })
   },
   bindCustomer(params) {
-    console.log(params, 'params--')
     bindCustomer(params).then(res => {
       this.setData({
-
         loadModal: false
       })
       if (res.data.status === 0) {
@@ -59,7 +48,6 @@ Page({
         if (res.data.data.boutique) {
           boutique = res.data.data.boutique
         }
-
         wx.reLaunch({
           url: '/pages/binded/binded?saName=' + saName + '&boutique=' + boutique
         })
@@ -69,13 +57,20 @@ Page({
         this.setData({
           modelShow: true,
           errinfo: err
-
         })
       }
-
     })
   },
   check: function (e) {
+    //测试逻辑
+    console.log(this.data.cdbNumber)
+    if (errInfo[this.data.cdbNumber]) {
+      this.setData({
+        modelShow: true,
+        errinfo: errInfo[this.data.cdbNumber]
+      })
+      return
+    }
     if (this.data.cdbNumber) {
       this.getCdb()
     }
@@ -86,7 +81,6 @@ Page({
       cdbUserDto: this.data.cdbInfo
     })
   },
-
   recheck() {
     this.setData({
       cdbInfo: '',
@@ -98,10 +92,13 @@ Page({
       cdbNumber: e.detail.value
     })
   },
-
-  /**
-   * Lifecycle function--Called when page load
-   */
+  onShow() {
+    if (app.globalData.scene === 1120 | app.globalData.scene === 1121) {
+      wx.navigateTo({
+        url: '/pages/index/index'
+      })
+    }
+  },
   onLoad: function (options) {
     if (options.from = 'index') {
       let user = store.get('currentCustomer')
@@ -110,7 +107,6 @@ Page({
       })
     } else {
       let self = this
-
       let userIds = []
       wx.qy.getCurExternalContact({
         success: function (res) {
@@ -134,24 +130,4 @@ Page({
       })
     }
   },
-
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-    console.log('hide')
-    wx.redirectTo({
-      url: '/pages/index/index'
-    })
-  },
-
-
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
 })

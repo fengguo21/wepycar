@@ -47,10 +47,10 @@
   </view>
   <view class="handle">
     <view bindtap='recheck' class="reCheck">重新匹配</view>
-    <view bindtap='confirm' class=" bind">确认绑定</view>
+    <view bindtap='confirm' class="bind">确认绑定</view>
   </view>
 </view>
-<view wx:if='{{isChecked==false}}'>
+<view wx:if='{{!isChecked}}'>
   <view class="checkcdb">
     <view class="titleWrapper">
       <text class="title">顾客CDB编号</text>

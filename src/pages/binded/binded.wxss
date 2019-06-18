@@ -1,81 +1,88 @@
 /* pages/binded/binded.wxss */
-.content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.content .avatar{
-    margin-top: 77px;
-    margin-bottom: 27px;
-    width:100px;
-height:100px;
-border-radius:4px;
-}
-.content .name{
-font-size:22px;
-font-family:PingFangSC-Medium;
-font-weight:500;
-color:rgba(0,0,0,1);
-line-height:30px;
-}
-.content .title{
-    font-size:22px;
-font-family:PingFangSC-Semibold;
-font-weight:600;
-color:rgba(163,0,0,1);
-line-height:30px;
-margin-top: 32px;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.content .greeting{
-     
-width:454px;
-height:161px;
-font-size:14px;
-font-family:PingFangSC-Regular;
-font-weight:400;
-color:rgba(64,64,64,1);
-line-height:28px;
-box-shadow:0px -2px 6px 0px rgba(0,0,0,0.04);
-border-radius:2px;
-padding:15px;
-margin:15px 0;
+.content .avatar {
+  margin-top: 77px;
+  margin-bottom: 27px;
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
 
+.content .name {
+  font-size: 22px;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  line-height: 30px;
 }
-.greeting .message{
- border-top: 1px solid #f6efe3;
-}
-.greeting .message span{
- border-bottom: 1px solid #f6efe3;
-padding-bottom:4px;
-}
-.line{
-    border-top: 2px solid #DABA82;
-    opacity: .45;
-}
-.greeting .title{
-    font-size:15px;
-font-family:PingFangSC-Semibold;
-font-weight:600;
-color:rgba(190,161,110,1);
-line-height:21px;
 
+.content .title {
+  font-size: 22px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  color: rgba(163, 0, 0, 1);
+  line-height: 30px;
+  margin-top: 32px;
 }
-.send{
-    width:320px;
-height:44px;
-background:rgba(165,1,0,1);
-border-radius:1px;
-font-size:15px;
-font-family:SFNSText;
-color:rgba(255,255,255,1);
-line-height:44px;
+
+.content .greeting {
+  width: 454px;
+  height: 161px;
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(64, 64, 64, 1);
+  line-height: 28px;
+  box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+  padding: 15px;
+  margin: 15px 0;
 }
-.tips{
-    font-size:13px;
-font-family:AppleSystemUIFont;
-color:rgba(181,181,181,1);
-line-height:16px;
-margin-top: 15px;
+
+.greeting .message {
+  border-top: 1px solid #f6efe3;
+}
+
+.greeting .message span {
+  border-bottom: 1px solid #f6efe3;
+  padding-bottom: 4px;
+}
+
+.line {
+  border-top: 2px solid #daba82;
+  opacity: 0.45;
+}
+
+.greeting .title {
+  font-size: 16px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  color: rgba(190, 161, 110, 1);
+  line-height: 21px;
+}
+
+.send {
+  width: 320px;
+  height: 44px;
+  background: rgba(165, 1, 0, 1);
+  border-radius: 1px;
+  font-size: 16px;
+  font-family: SFNSText;
+  color: rgba(255, 255, 255, 1);
+  line-height: 44px;
+}
+
+.tips {
+  font-size: 14px;
+  font-family: AppleSystemUIFont;
+  color: rgba(181, 181, 181, 1);
+  line-height: 16px;
+  margin-top: 16px;
 }
