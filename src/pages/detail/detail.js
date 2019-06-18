@@ -10,7 +10,7 @@ Page({
     user: '',
     cdbNumber: '',
     cdbInfo: '',
-    errinfo: ''
+    errText: ''
   },
 
   // ***********生命周期函数
@@ -72,7 +72,7 @@ Page({
       if (err) {
         this.setData({
           modelShow: true,
-          errinfo: err
+          errText: err
         })
       }
     })
@@ -99,7 +99,7 @@ Page({
       if (err) {
         this.setData({
           modelShow: true,
-          errinfo: err
+          errText: err
         })
       }
     })
@@ -110,7 +110,7 @@ Page({
     if (errInfo[this.data.cdbNumber]) {
       this.setData({
         modelShow: true,
-        errinfo: errInfo[this.data.cdbNumber]
+        errText: errInfo[this.data.cdbNumber]
       })
       return
     }

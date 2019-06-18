@@ -5,7 +5,7 @@ Page({
   data: {
     selecting: false,
     modelShow: false,
-    errinfo: '',
+    errText: '',
     user: {},
     users: [],
     shwoDetail: false,
@@ -76,7 +76,7 @@ Page({
     }).catch(err => {
       this.setData({
         modelShow: true,
-        errinfo: err
+        errText: err
       })
     })
   },

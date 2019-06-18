@@ -54,7 +54,9 @@ const http = (path, params, method, head) => {
         if (res.data.status == 0) {
           resolve(res)
         } else {
+
           let errcode = res.data.status
+          console.log(errInfo[errcode], '=================')
           if (errInfo[errcode]) {
             reject(errInfo[errcode])
           } else {
