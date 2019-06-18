@@ -56,7 +56,7 @@ Page({
   },
   selectExternal() {
     let self = this
-    if (this.data.selecting === false) {
+    if (!this.data.selecting) {
       self.setData({
         selecting: true
       })

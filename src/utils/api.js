@@ -1,7 +1,6 @@
 import http from './http.js'
 import * as store from './store.js'
 import { brand } from './config.js'
-
 // Get External User Profiles
 export const getExternals = params => http('wechat-enterprise/v1/external/users/profiles', params, 'POST', {
     'Authorization': 'Bearer ' + store.get('token'),

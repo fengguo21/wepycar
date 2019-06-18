@@ -41,7 +41,6 @@ const http = (path, params, method, head) => {
       method: method,
       header: head,
       success: (res) => {
-        console.log(res, '----------------')
         wx.hideToast()
         if (res.statusCode == 401) {
           login()
@@ -65,7 +64,6 @@ const http = (path, params, method, head) => {
         }
       },
       fail: (error) => {
-        console.log(error, 'request fail-------------')
         wx.hideToast()
         let errinfo = '网络错误，请检查'
         reject(errinfo)
@@ -73,5 +71,4 @@ const http = (path, params, method, head) => {
     })
   })
 }
-
 export default http

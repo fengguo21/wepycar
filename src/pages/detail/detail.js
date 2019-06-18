@@ -13,7 +13,10 @@ Page({
     errinfo: ''
   },
   getCdb() {
-    getCdb({ cdbNumber: this.data.cdbNumber, externalUserId: this.data.user.externalUserId }).then(res => {
+    getCdb({
+      cdbNumber: this.data.cdbNumber,
+      externalUserId: this.data.user.externalUserId
+    }).then(res => {
       if (res) {
         let cdbInfo = res.data.data
         if (cdbInfo.country === '') {
