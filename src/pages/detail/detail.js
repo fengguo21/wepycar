@@ -22,7 +22,7 @@ Page({
       if (res) {
 
         let cdbInfo = res.data.data
-        if (cdbInfo.country == '') {
+        if (cdbInfo.country === '') {
           cdbInfo.country = 'CN'
         }
         this.setData({
@@ -50,7 +50,7 @@ Page({
 
         loadModal: false
       })
-      if (res.data.status == 0) {
+      if (res.data.status === 0) {
         let saName = ''
         let boutique = ''
         if (res.data.data.saName) {

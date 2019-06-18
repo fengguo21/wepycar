@@ -1,4 +1,5 @@
 // pages/binded/binded.js
+
 import * as store from '../../utils/store.js';
 
 Page({

@@ -1,6 +1,7 @@
 // index.js
 // import * as store from '../../utils/store.js';
 // 获取应用实例
+const app = getApp()
 import * as store from '../../utils/store.js'
 import { getExternals } from '../../utils/api.js'
 Page({
@@ -11,7 +12,7 @@ Page({
     user: {},
     users: [],
     shwoDetail: false,
-    flag: '',
+
     curUserId: ''
   },
   // 事件处理函数
@@ -19,14 +20,14 @@ Page({
   getExternals(userIds, tag) {
     getExternals({ 'externalUserIds': userIds }).then(res => {
 
-      if (tag == 1) {
+      if (tag === 1) {
         let user = res.data.data[0]
-        if (user.bind == false) {
+        if (user.bind === false) {
           store.set('currentCustomer', res.data.data[0])
           wx.navigateTo({
             url: '/pages/detail/detail?from=index'
           })
-        } else if (user.bind == true) {
+        } else if (user.bind === true) {
           this.setData({
             shwoDetail: true,
             user: user
@@ -35,9 +36,9 @@ Page({
       } else {
         this.setData({
           users: res.data.data,
-          flag: 2
 
         })
+        app.globalData.scene = ''
       }
     }).catch(err => {
 
@@ -63,7 +64,7 @@ Page({
   },
   selectExternal() {
     let self = this
-    if (this.data.selecting == false) {
+    if (this.data.selecting === false) {
       self.setData({
         selecting: true
       })
@@ -85,41 +86,44 @@ Page({
     }
   },
   onShow: function (options) {
-    let self = this
-    let userIds = []
-    wx.qy.getCurExternalContact({
-      success: function (res) {
-        var userId = res.userId //返回当前外部联系人userId
-        if (userId) {
-          if (userId == self.data.curUserId && self.data.flag == 2) {
-            return
-          }
-          self.setData({
-            curUserId: userId
-          })
-          userIds.push(userId)
-          self.getExternals(userIds, 1)
-        }
-      },
-      fail: function () {
-        wx.qy.getCurExternalContact({
-          success: function (res) {
-            var userId = res.userId //返回当前外部联系人userId
-            console.log(userId, 'second    userid')
-            if (userId) {
+    if (app.globalData.scene === 1120 | app.globalData.scene === 1121) {
+      console.log('secne index')
+      let self = this
+      let userIds = []
+      wx.qy.getCurExternalContact({
+        success: function (res) {
+          var userId = res.userId //返回当前外部联系人userId
+          if (userId) {
 
-              userIds.push(userId)
-              self.getExternals(userIds, 1)
-            }
+            self.setData({
+              curUserId: userId,
+
+            })
+            userIds.push(userId)
+            self.getExternals(userIds, 1)
           }
-        })
-      }
-    })
+        },
+        fail: function () {
+          wx.qy.getCurExternalContact({
+            success: function (res) {
+              var userId = res.userId //返回当前外部联系人userId
+              console.log(userId, 'second    userid')
+              if (userId) {
+
+                userIds.push(userId)
+                self.getExternals(userIds, 1)
+              }
+            }
+          })
+        }
+      })
+    }
+
 
   },
   toDetail(e) {
     let user = e.currentTarget.dataset.item
-    if (user.bind == true) {
+    if (user.bind === true) {
       return
     }
     store.set('currentCustomer', user)
