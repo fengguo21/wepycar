@@ -1,16 +1,16 @@
 <cu-custom isShow="{{modelShow}}" err-info='{{errText}}'></cu-custom>
 <view class="tab">
   <image class="logo" src="../../images/logo.png" />
-  <view class="addWrapper" wx:if="{{shwoDetail!==true}}">
+  <view class="addWrapper" wx:if="{{!shwoDetail}}">
     <image class="add" src="../../images/add.png" bindtap='selectExternal' />
   </view>
 </view>
-<view class="content" wx:if="{{shwoDetail===true}}">
+<view class="content" wx:if="{{shwoDetail}}">
   <image class="avatar" src="{{user.avatar}}" />
   <view class="bindedName">{{user.name}}</view>
   <view class="bindedinfo">
-    <view class='cdb' style="margin-right:30px">已完成绑定 {{user.cdbId}}</view>
-    <view class='date'>{{user.bindDate}}</view>
+    <view class="cdb" style="margin-right:30px">已完成绑定 {{user.cdbId}}</view>
+    <view class="date">{{user.bindDate}}</view>
   </view>
   <view class="greeting indexpage">
     <view class="header">提示</view>
@@ -38,7 +38,7 @@
       </view>
     </view>
     <view class="rightInfo">
-      <view class='date'>{{item.bindDate}}</view>
+      <view class="date">{{item.bindDate}}</view>
       <view class="arrow">
         <image wx:if="{{item.bind==false}}" src="../../images/arrow.png" />
       </view>

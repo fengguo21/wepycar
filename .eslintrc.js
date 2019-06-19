@@ -18,7 +18,7 @@ module.exports = {
     'html'
   ],
   settings: {
-    'html/html-extensions': ['.html', '.wpy', '.wxml']
+    'html/html-extensions': ['.html', '.wpy']
   },
   // add your custom rules here
   'rules': {

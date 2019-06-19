@@ -18,7 +18,7 @@ Page({
       let userIds = []
       wx.qy.getCurExternalContact({
         success: function (res) {
-          var userId = res.userId //返回当前外部联系人userId
+          let userId = res.userId //返回当前外部联系人userId
           if (userId) {
             self.setData({
               curUserId: userId,
@@ -30,7 +30,7 @@ Page({
         fail: function () {
           wx.qy.getCurExternalContact({
             success: function (res) {
-              var userId = res.userId //返回当前外部联系人userId
+              let userId = res.userId //返回当前外部联系人userId
               console.log(userId, 'second    userid')
               if (userId) {
                 userIds.push(userId)
@@ -110,7 +110,7 @@ Page({
       wx.qy.selectExternalContact({
         filterType: 0, // 0表示展示全部外部联系人列表，1表示仅展示未曾选择过的外部联系人。默认值为0；除了0与1，其他值非法。
         success: function (res) {
-          var userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
+          let userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
           self.getExternals(userIds, 0)
         },
         fail: function (err) {

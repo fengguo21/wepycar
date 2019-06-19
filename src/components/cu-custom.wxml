@@ -2,6 +2,6 @@
   <view class='mask' bindtap="hide"></view>
   <view class="content">
     <view class="info">{{errInfo}}</view>
-    <view class='btn' bindtap="hide">确定</view>
+    <view class="btn" bindtap="hide">确定</view>
   </view>
 </view>

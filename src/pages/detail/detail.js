@@ -24,7 +24,7 @@ Page({
       let userIds = []
       wx.qy.getCurExternalContact({
         success: function (res) {
-          var userId = res.userId // 返回当前外部联系人userId
+          let userId = res.userId // 返回当前外部联系人userId
           if (userId) {
             userIds.push(userId)
             self.getExternals(userIds)
@@ -33,7 +33,7 @@ Page({
         fail: function () {
           wx.qy.getCurExternalContact({
             success: function (res) {
-              var userId = res.userId // 返回当前外部联系人userId
+              let userId = res.userId // 返回当前外部联系人userId
               if (userId) {
                 userIds.push(userId)
                 self.getExternals(userIds)
