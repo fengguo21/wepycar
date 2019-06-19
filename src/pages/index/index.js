@@ -1,32 +1,32 @@
 import * as store from '../../utils/store.js'
-import { getExternals } from '../../utils/api.js'
+import {getExternals, getCdb, bindCustomer} from '../../utils/api.js'
+
 const app = getApp()
 Page({
   data: {
+    pageStep: 0, // 0列表状态，1待绑定状态，2已绑定待跳转状态
     selecting: false,
     modelShow: false,
     errText: '',
-    user: {},
     users: [],
-    shwoDetail: false,
-    curUserId: ''
+    isChecked: false,
+    user: '',
+    cdbNumber: '',
+    cdbInfo: ''
   },
 
   onShow: function (options) {
-    //1120 1121 为入口2,3的场景值
+    // 1120 1121 为入口2,3的场景值
     this.setData({
-      users: store.get("selectedUsers"),
+      users: store.get('selectedUsers')
     })
     if (app.globalData.scene === 1120 | app.globalData.scene === 1121) {
       let self = this
       let userIds = []
       wx.qy.getCurExternalContact({
         success: function (res) {
-          let userId = res.userId //返回当前外部联系人userId
+          let userId = res.userId // 返回当前外部联系人userId
           if (userId) {
-            self.setData({
-              curUserId: userId,
-            })
             userIds.push(userId)
             self.getExternals(userIds, 1)
           }
@@ -34,7 +34,7 @@ Page({
         fail: function () {
           wx.qy.getCurExternalContact({
             success: function (res) {
-              let userId = res.userId //返回当前外部联系人userId
+              let userId = res.userId // 返回当前外部联系人userId
               if (userId) {
                 userIds.push(userId)
                 self.getExternals(userIds, 1)
@@ -57,27 +57,29 @@ Page({
   getExternals(userIds, tag) {
     getExternals({ 'externalUserIds': userIds }).then(res => {
       if (tag === 1) {
+        app.globalData.scene = ''
         let user = res.data.data[0]
         if (!user.bind) {
           store.set('currentCustomer', res.data.data[0])
           app.globalData.scene = ''
           this.setData({
-            shwoDetail: false,
+            pageStep: 1,
             user: user
           })
-          wx.navigateTo({
-            url: '/pages/detail/detail?from=index'
+          this.setData({
+            pageStep: 1,
+            user: user
           })
         } else if (user.bind === true) {
           this.setData({
-            shwoDetail: true,
+            pageStep: 2,
             user: user
           })
         }
       } else {
-        store.set("selectedUsers", res.data.data)
+        store.set('selectedUsers', res.data.data)
         this.setData({
-          users: res.data.data,
+          users: res.data.data
         })
         app.globalData.scene = ''
       }
@@ -88,7 +90,7 @@ Page({
       })
     })
   },
-  //跳转到warm
+  // 跳转到warm
   toWarm() {
     wx.navigateToMiniProgram({
       appId: 'wx1ea318c84338cee5',
@@ -100,7 +102,7 @@ Page({
   cancelToWarm() {
     app.globalData.scene = ''
     this.setData({
-      shwoDetail: false,
+      pageStep: 0
     })
   },
   selectExternal() {
@@ -114,8 +116,6 @@ Page({
         success: function (res) {
           let userIds = res.userIds// 返回此次选择的外部联系人userId列表，数组类型
           self.getExternals(userIds, 0)
-        },
-        fail: function (err) {
         },
         complete: function () {
           self.setData({
@@ -131,8 +131,101 @@ Page({
       return
     }
     store.set('currentCustomer', user)
-    wx.navigateTo({
-      url: '/pages/detail/detail?from=index'
+    this.setData({
+      pageStep: 1,
+      user: user
+    })
+    // wx.navigateTo({
+    //   url: '/pages/detail/detail?from=index'
+    // })
+  },
+
+  getCdb() {
+    getCdb({
+      cdbNumber: this.data.cdbNumber,
+      externalUserId: this.data.user.externalUserId
+    }).then(res => {
+      if (res) {
+        let cdbInfo = res.data.data
+        if (cdbInfo.country === '') {
+          cdbInfo.country = 'CN'
+        }
+        this.setData({
+          cdbInfo: cdbInfo,
+          cdbNumber: '',
+          isChecked: true
+        })
+      }
+    }).catch(err => {
+      if (err) {
+        this.setData({
+          modelShow: true,
+          errText: err
+        })
+      }
+    })
+  },
+  bindCustomer(params) {
+    bindCustomer(params).then(res => {
+      let selectedUsers = store.get('selectedUsers')
+      for (let i = 0; i < selectedUsers.length; i++) {
+        if (selectedUsers[i].externalUserId === this.data.user.externalUserId) {
+          selectedUsers[i].bind = true
+        }
+      }
+      store.set('selectedUsers', selectedUsers)
+      this.setData({
+        pageStep: 0
+
+      })
+      if (res.data.status === 0) {
+        let saName = ''
+        let boutique = ''
+        if (res.data.data.saName) {
+          saName = res.data.data.saName
+        }
+        if (res.data.data.boutique) {
+          boutique = res.data.data.boutique
+        }
+        wx.redirectTo({
+          url: '/pages/binded/binded?saName=' + saName + '&boutique=' + boutique
+        })
+      }
+    }).catch(err => {
+      if (err) {
+        this.setData({
+          modelShow: true,
+          errText: err
+        })
+      }
+    })
+  },
+  check: function (e) {
+    if (this.data.cdbNumber) {
+      this.getCdb()
+    }
+  },
+  cancelcheck() {
+    this.setData({
+      pageStep: 0
+    })
+    app.globalData.scene = ''
+  },
+  confirm() {
+    this.bindCustomer({
+      externalUserId: this.data.user.externalUserId,
+      cdbUserDto: this.data.cdbInfo
+    })
+  },
+  recheck() {
+    this.setData({
+      cdbInfo: '',
+      isChecked: false
+    })
+  },
+  inputCdb(e) {
+    this.setData({
+      cdbNumber: e.detail.value
     })
   }
 })

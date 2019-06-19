@@ -31,7 +31,6 @@ App({
                 type: type
               }).then(res => {
                 store.set('token', res.token)
-              }).catch(err => {
               })
             }
           })
@@ -43,7 +42,9 @@ App({
     this.globalData.scene = options.scene
   },
   onHide() {
-    //关闭小程序，重定向至首页
+    // 关闭小程序，重定向至首页
+    this.globalData.scene = ''
+
     let pageLength = getCurrentPages().length
     if (pageLength > 1) {
       wx.navigateBack({

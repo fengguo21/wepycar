@@ -15,8 +15,8 @@
       </span>
     </view>
   </view>
-  <navigator open-type="exit" target="miniProgram">
+  <!-- <navigator open-type="exit" target="miniProgram"> -->
     <button class="send" bindtap="sendGreeting">复制并发送欢迎消息</button>
-  </navigator>
+  <!-- </navigator> -->
   <view class="tips">点击即可复制消息，在聊天框内长按粘贴发送</view>
 </view>
