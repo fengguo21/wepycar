@@ -40,10 +40,6 @@ Page({
           externalUserIds: self.data.customer.externalUserId,
           // 必填，会话名称。单聊时该参数传入空字符串""即可。
           groupName: '',
-          success: function (res) {
-          },
-          fail: function (res) {
-          }
         });
       }
     })
