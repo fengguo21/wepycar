@@ -14,7 +14,6 @@ Page({
 
   onShow: function (options) {
     if (app.globalData.scene === 1120 | app.globalData.scene === 1121) {
-      console.log('secne index')
       let self = this
       let userIds = []
       wx.qy.getCurExternalContact({

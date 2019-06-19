@@ -14,7 +14,7 @@ Page({
 
   // ***********生命周期函数
   onLoad: function (options) {
-    if (options.from = 'index') {
+    if (options.from === 'index') {
       let user = store.get('currentCustomer')
       this.setData({
         user: user
