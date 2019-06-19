@@ -58,12 +58,19 @@ Page({
         let user = res.data.data[0]
         if (!user.bind) {
           store.set('currentCustomer', res.data.data[0])
+          app.globalData.scene = ''
+          this.setData({
+            shwoDetail: false,
+            users: res.data.data,
+            user: user
+          })
           wx.navigateTo({
             url: '/pages/detail/detail?from=index'
           })
         } else if (user.bind === true) {
           this.setData({
             shwoDetail: true,
+            users: res.data.data,
             user: user
           })
         }

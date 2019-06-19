@@ -59,7 +59,7 @@
       <input focus maxlength="7" placeholder="请输入CDB编号" type="number" bindinput="inputCdb" />
     </view>
   </view>
-  <view class="">
+  <view class="inputWrapper">
     <button class="cu-btn" bindtap="check">查找</button>
   </view>
 </view>

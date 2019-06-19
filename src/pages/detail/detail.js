@@ -1,7 +1,6 @@
 import * as store from '../../utils/store.js'
 import { getCdb, bindCustomer } from '../../utils/api.js'
 import { errInfo } from '../../utils/config.js'
-const app = getApp()
 Page({
   data: {
     users: [],
@@ -42,13 +41,6 @@ Page({
             }
           })
         }
-      })
-    }
-  },
-  onShow() {
-    if (app.globalData.scene === 1120 | app.globalData.scene === 1121) {
-      wx.navigateTo({
-        url: '/pages/index/index'
       })
     }
   },
