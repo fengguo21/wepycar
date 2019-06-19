@@ -19,7 +19,6 @@
   font-family: PingFangSC-Regular;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
-  line-height: 20px;
   line-height: 44px;
   text-indent: 0.5em;
 }
