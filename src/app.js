@@ -42,6 +42,15 @@ App({
   onShow(options) {
     this.globalData.scene = options.scene
   },
+  onHide() {
+    //关闭小程序，重定向至首页
+    let pageLength = getCurrentPages().length
+    if (pageLength > 1) {
+      wx.navigateBack({
+        delta: pageLength - 1
+      })
+    }
+  },
   globalData: {
   }
 })

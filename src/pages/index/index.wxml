@@ -1,8 +1,8 @@
 <cu-custom isShow="{{modelShow}}" err-info='{{errText}}'></cu-custom>
 <view class="tab">
   <image class="logo" src="../../images/logo.png" />
-  <view class="addWrapper" wx:if="{{!shwoDetail}}">
-    <image class="add" src="../../images/add.png" bindtap='selectExternal' />
+  <view class="addWrapper" wx:if="{{!shwoDetail}}" bindtap='selectExternal'>
+    <image class="add" src="../../images/add.png" />
   </view>
 </view>
 <view class="content" wx:if="{{shwoDetail}}">

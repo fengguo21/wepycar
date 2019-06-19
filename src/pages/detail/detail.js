@@ -11,7 +11,6 @@ Page({
     cdbInfo: '',
     errText: ''
   },
-
   // ***********生命周期函数
   onLoad: function (options) {
     if (options.from === 'index') {
@@ -71,9 +70,13 @@ Page({
   },
   bindCustomer(params) {
     bindCustomer(params).then(res => {
-      this.setData({
-        loadModal: false
-      })
+      let selectedUsers = store.get('selectedUsers')
+      for (let i = 0; i < selectedUsers.length; i++) {
+        if (selectedUsers[i].externalUserId == this.data.user.externalUserId) {
+          selectedUsers[i].bind = true
+        }
+      }
+      store.set('selectedUsers', selectedUsers)
       if (res.data.status === 0) {
         let saName = ''
         let boutique = ''
@@ -83,7 +86,7 @@ Page({
         if (res.data.data.boutique) {
           boutique = res.data.data.boutique
         }
-        wx.reLaunch({
+        wx.redirectTo({
           url: '/pages/binded/binded?saName=' + saName + '&boutique=' + boutique
         })
       }
@@ -97,15 +100,6 @@ Page({
     })
   },
   check: function (e) {
-    //测试逻辑
-    console.log(this.data.cdbNumber)
-    if (errInfo[this.data.cdbNumber]) {
-      this.setData({
-        modelShow: true,
-        errText: errInfo[this.data.cdbNumber]
-      })
-      return
-    }
     if (this.data.cdbNumber) {
       this.getCdb()
     }
@@ -127,5 +121,4 @@ Page({
       cdbNumber: e.detail.value
     })
   },
-
 })

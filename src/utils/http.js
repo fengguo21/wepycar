@@ -30,7 +30,7 @@ const http = (path, params, method, head) => {
   const newParams = { ...params }
   wx.showToast({
     title: '正在加载...',
-    duration: 10000,
+    duration: 15000,
     mask: true,
     icon: 'loading'
   })
@@ -44,10 +44,9 @@ const http = (path, params, method, head) => {
         wx.hideToast()
         if (res.statusCode == 401) {
           login()
-          let errcode = res.statusCode
-          reject(errInfo[errcode])
+          return
         }
-        if (res.statusCode == 400 | res.statusCode == 403 | res.statusCode == 404 | res.statusCode == 502) {
+        if (res.statusCode == 400 | res.statusCode == 403 | res.statusCode == 404 | res.statusCode == 502 | res.statusCode == 999) {
           let errcode = res.statusCode
           reject(errInfo[errcode])
         }

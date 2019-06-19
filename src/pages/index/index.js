@@ -13,6 +13,10 @@ Page({
   },
 
   onShow: function (options) {
+    //1120 1121 为入口2,3的场景值
+    this.setData({
+      users: store.get("selectedUsers"),
+    })
     if (app.globalData.scene === 1120 | app.globalData.scene === 1121) {
       let self = this
       let userIds = []
@@ -31,7 +35,6 @@ Page({
           wx.qy.getCurExternalContact({
             success: function (res) {
               let userId = res.userId //返回当前外部联系人userId
-              console.log(userId, 'second    userid')
               if (userId) {
                 userIds.push(userId)
                 self.getExternals(userIds, 1)
@@ -60,7 +63,6 @@ Page({
           app.globalData.scene = ''
           this.setData({
             shwoDetail: false,
-            users: res.data.data,
             user: user
           })
           wx.navigateTo({
@@ -69,11 +71,11 @@ Page({
         } else if (user.bind === true) {
           this.setData({
             shwoDetail: true,
-            users: res.data.data,
             user: user
           })
         }
       } else {
+        store.set("selectedUsers", res.data.data)
         this.setData({
           users: res.data.data,
         })
