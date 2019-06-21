@@ -55,7 +55,7 @@
 				{
 					"id": -1,
 					"name": "detail",
-					"pathName": "pages/detail/detail",
+					"pathName": "pages/unbind/unbind",
 					"query": "",
 					"scene": null
 				},

@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/detail/detail",
+    "pages/unbind/unbind",
+    "pages/success/success",
     "pages/binded/binded"
   ],
   "window": {

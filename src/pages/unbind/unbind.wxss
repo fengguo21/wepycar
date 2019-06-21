@@ -1,4 +1,4 @@
-/* pages/detail/detail.wxss */
+/* pages/unbind/unbind.wxss */
 
 .infoItem {
   margin: 15px;

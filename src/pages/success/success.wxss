@@ -1,20 +1,13 @@
 /* pages/binded/binded.wxss */
-page{
-  height: 100%;
-}
 .contentSuccess {
-   display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  margin-top:-50px;
-  
-  
 }
 
 .contentSuccess .avatar {
-  
+  margin-top: 77px;
   margin-bottom: 27px;
   width: 100px;
   height: 100px;
@@ -38,7 +31,43 @@ page{
   margin-top: 32px;
 }
 
+.contentSuccess .greeting {
+  width: 454px;
+  height: 161px;
+  font-size: 14px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(64, 64, 64, 1);
+  line-height: 28px;
+  box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+  padding: 15px;
+  margin: 15px 0;
 
+}
+
+.greeting .message {
+  border-top: 1px solid #f6efe3;
+}
+
+.greeting .message span {
+  border-bottom: 1px solid #f6efe3;
+  padding-bottom: 4px;
+}
+
+.line {
+  border-top: 2px solid #DABA82;
+  opacity: .45;
+}
+
+.greeting .title {
+  font-size: 15px;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  color: rgba(190, 161, 110, 1);
+  line-height: 21px;
+
+}
 
 .send {
   width: 320px;
@@ -58,19 +87,3 @@ page{
   line-height: 16px;
   margin-top: 15px;
 }
-
-
-
-
-
-.contentSuccess .bindedinfo {
- font-size: 14px;
-  font-family: PingFangSC-Regular;
-  font-weight: 400;
-  color: rgba(24, 24, 24, 1);
-  line-height: 20px;
-  display: flex;
-  margin: 30px 0;
-}
-
-

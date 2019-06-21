@@ -1,25 +1,30 @@
-import { wxLogin, checkToken, refreshToken } from './utils/api.js'
-import * as store from './utils/store.js'
-import { brand, agentId, type } from './utils/config.js'
+import { wxLogin, checkToken, refreshToken } from './utils/api.js';
+import * as store from './utils/store.js';
+import { brand, agentId, type } from './utils/config.js';
+
 App({
   onLaunch: function () {
     // 获取系统状态栏信息
     wx.getSystemInfo({
       success: e => {
         if (e.environment === 'wxwork') {
-          this.globalData.env = e.environment
+          this.globalData.env = e.environment;
         }
       }
-    })
+    });
+  },
+  onShow(options) {
+    this.globalData.loadingCount = 0;
+    wx.hideToast();
+    this.globalData.scene = options.scene;
     if (this.globalData.env === 'wxwork') {
       wx.qy.checkSession({
         success: function () {
           checkToken().then(res => {
-            if (res.data.status === 0 & res.data.data === false) {
-              refreshToken().then(res => {
-              })
+            if (res.data.status === 0 && res.data.data === false) {
+              refreshToken();
             }
-          })
+          });
         },
         fail: function () {
           wx.qy.login({
@@ -30,27 +35,20 @@ App({
                 agentId: agentId,
                 type: type
               }).then(res => {
-                store.set('token', res.token)
-              }).catch(err => {
-              })
+                store.set('token', res.token);
+              });
             }
-          })
+          });
         }
-      })
+      });
     }
-  },
-  onShow(options) {
-    this.globalData.scene = options.scene
   },
   onHide() {
-    //关闭小程序，重定向至首页
-    let pageLength = getCurrentPages().length
-    if (pageLength > 1) {
-      wx.navigateBack({
-        delta: pageLength - 1
-      })
-    }
+    // 关闭小程序，重定向至首页
+    this.globalData.scene = '';
+    this.globalData.loadingCount = 0;
   },
   globalData: {
+    loadingCount: 0
   }
-})
+});
