@@ -15,14 +15,17 @@ Page({
   },
 
   onShow: function(options) {
+    console.log('index onshow-------')
     if (inputWorkbench()) {
       this.setData({
         users: store.get('selectedUsers')
       });
     } else {
+      console.log('名片---- index')
       helper
         .checkBindingStatus()
         .then(hasBind => {
+          console.log('check first----',hasBind)
           if (hasBind) {
             wx.redirectTo({
               url: '/pages/binded/binded?from=index'

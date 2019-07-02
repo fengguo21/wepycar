@@ -2,6 +2,9 @@ import * as store                              from './store.js';
 import { errInfo, base, brand, agentId, type } from './config.js';
 import { wxLogin }                             from './api.js';
 import { loading }                             from './loading';
+import { helper } from '../pages/helper'
+import { inputWorkbench } from './scene';
+
 
 const login = function() {
   return new Promise((resolve, reject) => {
@@ -25,6 +28,30 @@ const login = function() {
     });
   });
 };
+
+const reCheckBindStatus = () => {
+  helper
+    .checkBindingStatus()
+    .then(hasBind => {
+      if (hasBind) {
+        wx.redirectTo({
+          url: '/pages/binded/binded?from=index'
+        });
+      } else {
+        wx.redirectTo({
+          url: '/pages/input-cdb/input-cdb?from=index'
+        });
+      }
+    })
+    .catch(err => {
+      console.log('err', err);
+      if (err) {
+        // TODO 错误提示
+
+      }
+    });
+
+}
 
 const http = (path, params, method, head) => {
   const newParams = { ...params };
@@ -76,7 +103,17 @@ const http = (path, params, method, head) => {
 
         // 尝试一次隐式登录
         login()
+        console.log('relog begin------')
+
           .then(() => {
+            console.log('relog------')
+            if(!inputWorkbench()){
+              console.log('名片页进入------')
+
+              reCheckBindStatus()
+              return
+
+            }
             wx.request({
               url: `${base}/${path}`, // 仅为示例，并非真实的接口地址
               data: newParams,
