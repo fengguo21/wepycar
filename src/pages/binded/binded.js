@@ -1,6 +1,6 @@
 import { inputWorkbench } from '../../utils/scene';
-import * as store         from '../../utils/store.js';
-import { helper }         from '../helper';
+import * as store from '../../utils/store.js';
+import { helper } from '../helper';
 
 Page({
   data: {
@@ -24,7 +24,7 @@ Page({
             });
           } else {
             wx.redirectTo({
-              url: '/pages/unbind/unbind'
+              url: '/pages/input-cdb/input-cdb'
             });
           }
         })

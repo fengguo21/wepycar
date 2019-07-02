@@ -6,6 +6,9 @@ export const sceneInput = {
 
 export function inputWorkbench() {
   const app = getApp();
+
+  console.log('input scene', app.globalData);
+
   return (
     app.globalData.scene !== sceneInput.OmnipotencePlus &&
     app.globalData.scene !== sceneInput.Profile

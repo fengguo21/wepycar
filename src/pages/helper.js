@@ -32,18 +32,23 @@ function checkBindingStatus() {
     };
 
     const app = getApp();
+    console.log(
+      'helper.inputWorkbench()',
+      inputWorkbench(),
+      app.globalData.scene
+    );
     if (!inputWorkbench()) {
       wx.qy.getCurExternalContact({
-        success: function (res) {
+        success: function(res) {
           let userId = res.userId; // 返回当前外部联系人userId
           if (userId) {
             app.globalData.externalId = userId;
             returnBindingStatus(userId);
           }
         },
-        fail: function () {
+        fail: function() {
           wx.qy.getCurExternalContact({
-            success: function (res) {
+            success: function(res) {
               let userId = res.userId; // 返回当前外部联系人userId
               if (userId) {
                 app.globalData.externalId = userId;

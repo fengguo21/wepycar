@@ -3,7 +3,7 @@ import * as store from './utils/store.js';
 import { brand, agentId, type } from './utils/config.js';
 
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 获取系统状态栏信息
     wx.getSystemInfo({
       success: e => {
@@ -16,17 +16,18 @@ App({
   onShow(options) {
     this.globalData.loadingCount = 0;
     wx.hideToast();
+    console.log('app onShow', options);
     this.globalData.scene = options.scene;
     if (this.globalData.env === 'wxwork') {
       wx.qy.checkSession({
-        success: function () {
+        success: function() {
           checkToken().then(res => {
             if (res.data.status === 0 && res.data.data === false) {
               refreshToken();
             }
           });
         },
-        fail: function () {
+        fail: function() {
           wx.qy.login({
             success: res => {
               wxLogin({

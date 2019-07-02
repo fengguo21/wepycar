@@ -1,5 +1,8 @@
 <view class="tab">
   <image class="logo" src="../../images/logo.png" />
+  <view class="homeWrapper" bindtap='toHome' wx:if="{{isWorkBench}}">
+    <image class="home" src="../../images/home.png" />
+  </view>
 </view>
 <view class="contentSuccess">
   <image class="avatar" src="{{customer.avatar}}" />

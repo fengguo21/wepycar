@@ -1,0 +1,52 @@
+<cu-custom is-show="{{modelShow}}" err-info="{{errText}}"></cu-custom>
+<view class="tab">
+  <image class="logo" src="../../images/logo.png" />
+</view>
+<view class="cu-list">
+  <view class="cu-item">
+    <view class="cu-avatar">
+      <image src="{{user.avatar}}" />
+    </view>
+    <view class="contents">
+      <view class="name">
+        <text class="text-cut">{{user.name}}</text>
+      </view>
+      <view wx:if="{{user.bind}}">
+        <text class="notbinded">已完成绑定 {{user.cdbId}}</text>
+      </view>
+      <view wx:else>
+        <text class="binded">待绑定CDB</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="infoItem">
+  <view class="title">顾客CDB编号</view>
+  <view class="value">{{cdbInfo.cdbNumber}}</view>
+</view>
+<view class="infoItem">
+  <view class="title">顾客姓名</view>
+  <view class="value">
+    {{cdbInfo.firstName?cdbInfo.firstName:''}}{{cdbInfo.lastName?cdbInfo.lastName:''}}
+  </view>
+</view>
+<view class="infoItem">
+  <view class="title">顾客姓名(英语/拼音)</view>
+  <view class="value">{{cdbInfo.firstNameEn}} {{cdbInfo.lastNameEn}}</view>
+</view>
+<view class="infoItem">
+  <view class="title">联系电话</view>
+  <view class="value">{{cdbInfo.mobileNumber}}</view>
+</view>
+<view class="infoItem">
+  <view class="title">电子邮件</view>
+  <view class="value">{{cdbInfo.email}}</view>
+</view>
+<view class="infoItem">
+  <view class="title">地址</view>
+  <view class="value">{{cdbInfo.billingAddress}}</view>
+</view>
+<view class="handle">
+  <view bindtap="recheck" class="reCheck">重新匹配</view>
+  <view bindtap="confirm" class=" bind">确认绑定</view>
+</view>

@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/unbind/unbind",
+    "pages/input-cdb/input-cdb",
     "pages/success/success",
-    "pages/binded/binded"
+    "pages/binded/binded",
+    "pages/show-profile/show-profile"
   ],
   "window": {
     "navigationBarBackgroundColor": "#4c77b6",

@@ -7,13 +7,18 @@ Page({
     customer: '',
     saName: '',
     greeting: '',
-    inputOnLoad: false
+    inputOnLoad: false,
+    isWorkBench: false
   },
   // ***********生命周期函数
-  onShow: function () {
+  onShow: function() {
     let self = this;
+    self.setData({
+      isWorkBench: inputWorkbench()
+    });
+
     if (!this.data.inputOnLoad) {
-      if (inputWorkbench()) {
+      if (this.data.isWorkBench) {
         // 工作台第二次进入时，直接到首页
         const deep = getCurrentPages().length;
         if (deep > 1) {
@@ -32,13 +37,20 @@ Page({
         .checkBindingStatus()
         .then(hasBind => {
           if (hasBind) {
-            wx.redirectTo({
-              url: '/pages/binded/binded'
-            });
+            // 返回到 input-cdb 页面，判断已绑定走到已绑定页面，这样已绑定页面不会有返回按钮
+            const deep = getCurrentPages().length;
+            if (deep > 1) {
+              wx.navigateBack({
+                delta: deep - 1
+              });
+            }
           } else {
-            wx.redirectTo({
-              url: '/pages/unbind/unbind'
-            });
+            const deep = getCurrentPages().length;
+            if (deep > 1) {
+              wx.navigateBack({
+                delta: deep - 1
+              });
+            }
           }
         })
         .catch(err => {
@@ -55,7 +67,7 @@ Page({
       inputOnLoad: false
     });
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     let self = this;
     let customer = store.get('currentCustomer');
     let boutique = options.boutique;
@@ -65,7 +77,7 @@ Page({
 
     // 获取 当前 SA 的名字
     wx.qy.getEnterpriseUserInfo({
-      success: function (res) {
+      success: function(res) {
         let name = res.userInfo.name;
         self.setData({
           customer: customer,
@@ -90,8 +102,7 @@ Page({
       data: this.data.greeting,
       success(res) {
         wx.getClipboardData({
-          success(res) {
-          }
+          success(res) {}
         });
         wx.qy.openEnterpriseChat({
           // 参与会话的外部联系人列表，格式为userId1;userId2;…，用分号隔开。
@@ -100,6 +111,11 @@ Page({
           groupName: ''
         });
       }
+    });
+  },
+  toHome() {
+    wx.reLaunch({
+      url: '/pages/index/index'
     });
   }
 });

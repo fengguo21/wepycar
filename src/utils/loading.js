@@ -18,6 +18,7 @@ export const loading = {
     const app = getApp();
     app.globalData.loadingCount--;
     if (app.globalData.loadingCount === 0) {
+      console.log('hide loading', app.globalData.loadingCount);
       wx.hideToast();
     }
   },

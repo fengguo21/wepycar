@@ -1,0 +1,35 @@
+<cu-custom is-show="{{modelShow}}" err-info="{{errText}}"></cu-custom>
+<view class="tab">
+  <image class="logo" src="../../images/logo.png" />
+</view>
+<view class="cu-list">
+  <view class="cu-item">
+    <view class="cu-avatar">
+      <image src="{{user.avatar}}" />
+    </view>
+    <view class="contents">
+      <view class="name">
+        <text class="text-cut">{{user.name}}</text>
+      </view>
+      <view wx:if="{{user.bind}}">
+        <text class="notbinded">已完成绑定 {{user.cdbId}}</text>
+      </view>
+      <view wx:else>
+        <text class="binded">待绑定CDB</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view>
+  <view class="checkcdb">
+    <view class="titleWrapper">
+      <text class="title">顾客CDB编号</text>
+    </view>
+    <view class="inputWrapper">
+      <input focus maxlength="7" placeholder="请输入CDB编号" type="number" bindinput="inputCdb" value="{{cdbNumber}}" />
+    </view>
+  </view>
+  <view class="inputWrapper">
+    <button class="cu-btn" bindtap="check">查找</button>
+  </view>
+</view>

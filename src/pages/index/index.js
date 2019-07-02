@@ -3,7 +3,6 @@ import { getExternals } from '../../utils/api.js';
 import { inputWorkbench } from '../../utils/scene';
 import { helper } from '../helper';
 
-const app = getApp();
 Page({
   data: {
     selecting: false,
@@ -15,7 +14,7 @@ Page({
     curUserId: ''
   },
 
-  onShow: function (options) {
+  onShow: function(options) {
     if (inputWorkbench()) {
       this.setData({
         users: store.get('selectedUsers')
@@ -30,11 +29,12 @@ Page({
             });
           } else {
             wx.redirectTo({
-              url: '/pages/unbind/unbind?from=index'
+              url: '/pages/input-cdb/input-cdb?from=index'
             });
           }
         })
         .catch(err => {
+          console.log('err', err);
           if (err) {
             // TODO 错误提示
             this.setData({
@@ -82,11 +82,11 @@ Page({
       });
       wx.qy.selectExternalContact({
         filterType: 0, // 0表示展示全部外部联系人列表，1表示仅展示未曾选择过的外部联系人。默认值为0；除了0与1，其他值非法。
-        success: function (res) {
+        success: function(res) {
           let userIds = res.userIds; // 返回此次选择的外部联系人userId列表，数组类型
           self.showExternalList(userIds);
         },
-        complete: function () {
+        complete: function() {
           self.setData({
             selecting: false
           });
@@ -101,7 +101,7 @@ Page({
     }
     store.set('currentCustomer', user);
     wx.navigateTo({
-      url: '/pages/unbind/unbind?from=index'
+      url: '/pages/input-cdb/input-cdb?from=index'
     });
   }
 });

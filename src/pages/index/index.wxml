@@ -2,7 +2,7 @@
 <view class="tab">
   <image class="logo" src="../../images/logo.png" />
   <view class="addWrapper" wx:if="{{!showDetail}}" bindtap='selectExternal'>
-    <image class="add" src="../../images/add.png" />
+        <image class="add" src="../../images/add.png" />
   </view>
 </view>
 <view class="cu-list">
